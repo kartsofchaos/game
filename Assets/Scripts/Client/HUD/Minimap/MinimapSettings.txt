@@ -1,0 +1,7 @@
+name=segment
+length=100
+width=100
+xMin=-300
+xMax=300
+zMin=-300
+zMax=300

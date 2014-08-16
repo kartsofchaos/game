@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 59d201815208ae646bd6a170af7b15ab
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - car: {instanceID: 0}
+  - speedGui: {instanceID: 0}
+  - rpmGui: {instanceID: 0}
+  - speedOmeter: {instanceID: 0}
+  - pointer: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 

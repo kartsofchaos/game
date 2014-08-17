@@ -24,6 +24,7 @@ To keep structure of the Unity project the following (preliminary) structure sho
 Contents of `Assets` folder:
 - `Editor`
 - `Extensions`
+- `Fonts`
 - `Game`
   - `Actors`
     - `Code`
@@ -37,14 +38,24 @@ Contents of `Assets` folder:
     - `Prefabs`
     - `Sounds`
     - `Textures`
+  - `GameModes`
+    - `Code`
+    - `Models`
+    - `Prefabs`
+    - `Sounds`
+    - `Textures`
+  - `HUD`
+    - `Code`
+    - `Prefabs`
+    - `Textures`
   - `Items`
+    - `Code`
     - `Models`
     - `Prefabs`
     - `Sounds`
     - `Textures`
   - `Menus`
     - `Code`
-    - `Fonts`
     - `Skins`
     - `Sounds`
     - `Textures`
@@ -57,6 +68,12 @@ Contents of `Assets` folder:
     - `Sounds`
 - `Plugins`
 - `Resources`
+  - `Actors`
+    - `Prefabs`
+  - `HUD`
+    - `Prefabs`
+  - `Skills`
+    - `Prefabs`
 - `Scenes`
 - `Standard Assets`
 

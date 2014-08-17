@@ -16,6 +16,50 @@ Using Subversion:
 - `svn checkout https://github.com/kartsofchaos/game`
 - [TortoiseSVN](http://tortoisesvn.net/)
 
+Directory structure
+-------------------
+
+To keep structure of the Unity project the following (preliminary) structure should be followed:
+
+Contents of `Assets` folder:
+- `Editor`
+- `Extensions`
+- `Game`
+  - `Actors`
+    - `Code`
+    - `Models`
+    - `Prefabs`
+    - `Sounds`
+    - `Textures`
+  - `Environment`
+    - `Code`
+    - `Models`
+    - `Prefabs`
+    - `Sounds`
+    - `Textures`
+  - `Items`
+    - `Models`
+    - `Prefabs`
+    - `Sounds`
+    - `Textures`
+  - `Menus`
+    - `Code`
+    - `Fonts`
+    - `Skins`
+    - `Sounds`
+    - `Textures`
+  - `Networking`
+    - `Code`
+  - `Skills`
+    - `Code`
+    - `Models`
+    - `Prefabs`
+    - `Sounds`
+- `Plugins`
+- `Resources`
+- `Scenes`
+- `Standard Assets`
+
 File formats
 ------------
 

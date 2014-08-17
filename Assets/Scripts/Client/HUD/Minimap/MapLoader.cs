@@ -44,7 +44,7 @@ public class MapLoader : HUDBase, IMapLoader {
 		minimapCamera.clearFlags = CameraClearFlags.Depth;
 
 		minimapMask = GameObject.FindGameObjectWithTag (Constants.TAG_MINIMAP_MASK);
-		minimapMask.gameObject.active = true;
+		minimapMask.gameObject.SetActive(true);
 
 		minimapPosition.x = minimapCamera.pixelRect.x;
 		minimapPosition.y = minimapCamera.pixelRect.y;

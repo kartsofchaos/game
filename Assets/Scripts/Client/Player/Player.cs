@@ -3,6 +3,15 @@ using System.Collections;
 
 public class Player : PlayerBase 
 {
+    private string _name;
+    public string Name
+    {
+        get
+        {
+            return _name;
+        }
+    }
+
     private float _health = 100.0f;
     public float Health
     {
@@ -30,8 +39,23 @@ public class Player : PlayerBase
         }
     }
 
+    public bool IsLocalPlayer
+    {
+        get
+        {
+          return PhotonView.isMine;
+        }
+    }
+
     private Vector3 startPosition;
     private Quaternion startRotation;
+
+    void Awake()
+    {
+        // Only read the properties for our own car
+        if (IsLocalPlayer)
+            readProperties();
+    }
 
     void Start()
     {
@@ -40,6 +64,14 @@ public class Player : PlayerBase
 
         startPosition = transform.position;
         startRotation = transform.rotation;
+    }
+
+    // Read our name from the playerproperties and destroy it
+    private void readProperties()
+    {
+        GameObject go = GameObject.Find("PlayerProperties");
+        _name = go.GetComponent<PlayerProperties>().Name;
+        Destroy(go);
     }
 
     public void SetTeam(Team team)
@@ -93,12 +125,14 @@ public class Player : PlayerBase
     {
         if (stream.isWriting == true)
         {
+            stream.SendNext(_name);
             stream.SendNext(_health);
             stream.SendNext(_armor);
         }
         else
         {
             float oldHealth = _health;
+            _name = (string)stream.ReceiveNext();
             _health = (float)stream.ReceiveNext();
             _armor = (float)stream.ReceiveNext();
 

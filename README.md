@@ -66,14 +66,12 @@ Contents of `Assets` folder:
     - `Models`
     - `Prefabs`
     - `Sounds`
+    - `Textures`
 - `Plugins`
 - `Resources`
   - `Actors`
-    - `Prefabs`
   - `HUD`
-    - `Prefabs`
   - `Skills`
-    - `Prefabs`
 - `Scenes`
 - `Standard Assets`
 

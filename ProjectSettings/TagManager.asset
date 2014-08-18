@@ -4,25 +4,27 @@
 TagManager:
   tags:
   - GameManager
-  - SceneProperties
-  - Terrain
-  - PowerUp
   - SpawnPoints
-  - FlagPlatform
+  - Terrain
   - Player
   - Self
-  - Flag
   - MinimapCamera
   - MinimapMask
-  - SecondaryCamera
-  - Skills
   - 
   - 
   - 
-  - Spawn Points Red
-  - Spawn Points
-  - Flag Platform
-  - Spawn Points Blue
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - FxTemporaire
   - 
@@ -34,8 +36,8 @@ TagManager:
   Builtin Layer 5: 
   Builtin Layer 6: 
   Builtin Layer 7: 
-  User Layer 8: Power Up
-  User Layer 9: Map
+  User Layer 8: Map
+  User Layer 9: 
   User Layer 10: 
   User Layer 11: 
   User Layer 12: 

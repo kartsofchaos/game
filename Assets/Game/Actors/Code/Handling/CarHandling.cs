@@ -925,6 +925,7 @@ public class CarHandling : CarBase
 			GUILayout.BeginArea (new Rect (10, 10, Screen.width, Screen.height));
 			{
 					GUILayout.Label ("Local car");
+					GUILayout.Label ("RPM: " + GetCurrentRPM());
 					GUILayout.Label ("Position: " + MyTransform.position);
 					GUILayout.Label ("Rotation: " + MyTransform.rotation);
 					GUILayout.Label ("Velocity: " + MyRigidBody.velocity);

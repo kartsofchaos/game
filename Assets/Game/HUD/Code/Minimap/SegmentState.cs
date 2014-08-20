@@ -1,9 +1,6 @@
-namespace MyMinimap
+public enum SegmentState : byte
 {
-	public enum SegmentState : byte
-	{
-		Destroyed = 0,
-		Loading = 0,
-		Active = 1
-	}
+	Destroyed = 0,
+	Loading = 0,
+	Active = 1
 }

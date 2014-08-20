@@ -1,10 +1,7 @@
 using System.Collections;
 
-namespace MyMinimap
+public interface IMapLoader
 {
-	public interface IMapLoader
-	{
-		void StartAsyncMethod(IEnumerator method);
-	}
+	void StartAsyncMethod(IEnumerator method);
 }
 

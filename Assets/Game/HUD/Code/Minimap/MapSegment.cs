@@ -1,29 +1,28 @@
 ﻿using UnityEngine;
 
-namespace MyMinimap {
-	public class MapSegment {
-		public GameObject gameObject { get; set; }
-		public SegmentState state { get; set; }
+public class MapSegment {
 
-		public void Destroy(bool resetState) {
-			if (gameObject != null) {
-				GameObject.Destroy(gameObject);
-				if(resetState)
-					state = SegmentState.Destroyed;
-			}
-		}
-		public void Reset() {
-			this.gameObject = null;
-			this.state = SegmentState.Destroyed;
-		}
+	public GameObject SegmentGameObject;
+	public SegmentState State;
 
-		public void Replace(MapSegment segment) {
-			if (gameObject != null)
-				GameObject.Destroy (gameObject);
-			this.gameObject = segment.gameObject;
-			this.state = segment.state;
+	public void Destroy(bool resetState) {
+		if (SegmentGameObject != null) {
+			GameObject.Destroy(SegmentGameObject);
+			if(resetState)
+				State = SegmentState.Destroyed;
 		}
+	}
 
+	public void Reset() {
+		this.SegmentGameObject = null;
+		this.State = SegmentState.Destroyed;
+	}
+
+	public void Replace(MapSegment segment) {
+		if (SegmentGameObject != null)
+			GameObject.Destroy (SegmentGameObject);
+		this.SegmentGameObject = segment.SegmentGameObject;
+		this.State = segment.State;
 	}
 
 }

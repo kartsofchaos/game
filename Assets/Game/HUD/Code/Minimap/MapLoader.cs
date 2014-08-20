@@ -1,5 +1,4 @@
 using UnityEngine;
-using MyMinimap;
 using System.Collections;
 
 public class MapLoader : HUDBase, IMapLoader {
@@ -25,8 +24,8 @@ public class MapLoader : HUDBase, IMapLoader {
 	private float zoomDuration = 0.7f;
 	private float moveDuration = 0.5f;
 
-	private Camera minimapCamera;
-	private GameObject minimapMask;
+	private Camera mapCamera;
+	private GameObject mapMask;
 	
 	private Vector2 minimapPosition;
 	private Vector2 minimapSize;
@@ -36,40 +35,46 @@ public class MapLoader : HUDBase, IMapLoader {
 	private float mapZoom;
 
 	void Start() {
-	
+		// Set init values
 		fullscreen = false;
 		toggleFullscreen = false;
 		toggling = false;
-		minimapCamera = gameObject.camera;
-		minimapCamera.clearFlags = CameraClearFlags.Depth;
 
-		minimapMask = GameObject.FindGameObjectWithTag (HUDConstants.TAG_MINIMAP_MASK);
-		minimapMask.gameObject.SetActive(true);
-
-		minimapPosition.x = minimapCamera.pixelRect.x;
-		minimapPosition.y = minimapCamera.pixelRect.y;
-		minimapSize.x = minimapCamera.pixelRect.width;
-		minimapSize.y = minimapCamera.pixelRect.height;
-		minimapZoom = minimapCamera.orthographicSize;
+		// Setup map camera
+		mapCamera = gameObject.camera;
+		mapCamera.clearFlags = CameraClearFlags.Depth;
+		mapMask = GameObject.FindGameObjectWithTag (HUDConstants.TAG_MINIMAP_MASK);
+		mapMask.gameObject.SetActive(true);
 		
+		// Setup map
 		mapPosition.x = Screen.width * 0.2f;
 		mapPosition.y = Screen.height * 0.1f;
 		mapSize.x = Screen.width * 0.6f;
 		mapSize.y = Screen.height * 0.8f;
 		mapZoom = 106f;
 
-		var bundle = AssetBundle.CreateFromFile (string.Format("{0}/{1}", System.IO.Directory.GetCurrentDirectory(), "Data/mapData.dat"));
+		// Setup minimap
+		minimapPosition.x = mapCamera.pixelRect.x;
+		minimapPosition.y = mapCamera.pixelRect.y;
+		minimapSize.x = mapCamera.pixelRect.width;
+		minimapSize.y = mapCamera.pixelRect.height;
+		minimapZoom = mapCamera.orthographicSize;
+
+		// Get player
+		player = CarHandling.transform;
+
+		var bundle = AssetBundle.CreateFromFile(string.Format("{0}/{1}", System.IO.Directory.GetCurrentDirectory(), "Data/mapData.dat"));
 		if (bundle == null) {
 			Debug.Log("Settings data not found!");
 			return;
 		}
 		var settingsData = bundle.mainAsset as TextAsset;
+		//string s = "name=segment\nlength=100\nwidth=100\nxMin=-50\nxMax=50\nzMin=-50\nzMax=50";
+		var mapSettings = new MapSettings(settingsData.text);
 
-		var mapSettings = new MapSettings (settingsData.text);
-
-		this.mapHandler = new MapHandler (this, bundle, mapSettings, LayerMask.NameToLayer ("Map"));
+		this.mapHandler = new MapHandler(this, bundle, mapSettings, LayerMask.NameToLayer("Map"));
 	    // Disable auto minimap for now
-        // this.mapHandler.Start(player.position);
+        //this.mapHandler.Start(player.position);
 	}
 
 	// Optmization, only move camera when needed.
@@ -90,7 +95,7 @@ public class MapLoader : HUDBase, IMapLoader {
 			}
 		}
 		this.moveCamera (player);
-        /* Disable auto minimap for now
+        // Disable auto minimap for now
 		if (this.mapHandler == null) {
 			return;
 		}
@@ -99,7 +104,7 @@ public class MapLoader : HUDBase, IMapLoader {
 			this.mapHandler.UpdateMap(player.position);
 			this.timer = 0;
 		}
-        */
+        
 	}
 
 	void moveCamera (Transform player)
@@ -165,12 +170,12 @@ public class MapLoader : HUDBase, IMapLoader {
 	
 	private IEnumerator zoomIn() {
 		float deltaT = 0;
-		if (minimapCamera.orthographicSize <= mapZoom) {
+		if (mapCamera.orthographicSize <= mapZoom) {
 			while ( deltaT < zoomDuration) {
 				deltaT += Time.deltaTime;
 				yield return true;
-				minimapCamera.orthographicSize = Mathf.Lerp(minimapCamera.orthographicSize, minimapZoom, deltaT / zoomDuration);
-				minimapMask.transform.localScale = Vector3.Lerp(minimapMask.transform.localScale, new Vector3(3000f, minimapMask.transform.localScale.y, 3000f), deltaT / zoomDuration);
+				mapCamera.orthographicSize = Mathf.Lerp(mapCamera.orthographicSize, minimapZoom, deltaT / zoomDuration);
+				mapMask.transform.localScale = Vector3.Lerp(mapMask.transform.localScale, new Vector3(3000f, mapMask.transform.localScale.y, 3000f), deltaT / zoomDuration);
 			}
 		}
 	}
@@ -180,8 +185,8 @@ public class MapLoader : HUDBase, IMapLoader {
 		while (deltaT < zoomDuration) {
 			deltaT += Time.deltaTime;
 			yield return true;
-			minimapCamera.orthographicSize = Mathf.Lerp (minimapCamera.orthographicSize, mapZoom, deltaT / zoomDuration);
-			minimapMask.transform.localScale = Vector3.Lerp (minimapMask.transform.localScale, new Vector3 (24000f, minimapMask.transform.localScale.y, 24000f), deltaT / zoomDuration);
+			mapCamera.orthographicSize = Mathf.Lerp (mapCamera.orthographicSize, mapZoom, deltaT / zoomDuration);
+			mapMask.transform.localScale = Vector3.Lerp (mapMask.transform.localScale, new Vector3 (24000f, mapMask.transform.localScale.y, 24000f), deltaT / zoomDuration);
 		}
 	}
 	
@@ -190,7 +195,7 @@ public class MapLoader : HUDBase, IMapLoader {
 		while (deltaT < moveDuration) {
 			deltaT += Time.deltaTime;
 			yield return true;
-			minimapCamera.pixelRect = createMinimapLerp(mapPosition.x, mapPosition.y, mapSize.x, mapSize.y, deltaT , moveDuration);
+			mapCamera.pixelRect = createMinimapLerp(mapPosition.x, mapPosition.y, mapSize.x, mapSize.y, deltaT , moveDuration);
 		}
 	}
 	
@@ -199,12 +204,12 @@ public class MapLoader : HUDBase, IMapLoader {
 		while (deltaT < moveDuration) {
 			deltaT += Time.deltaTime;
 			yield return true;
-			minimapCamera.pixelRect = createMinimapLerp(minimapPosition.x, minimapPosition.y, minimapSize.x, minimapSize.y, deltaT, moveDuration);
+			mapCamera.pixelRect = createMinimapLerp(minimapPosition.x, minimapPosition.y, minimapSize.x, minimapSize.y, deltaT, moveDuration);
 		}
 	}
 
 	private Rect createMinimapLerp(float x, float y, float width, float height, float deltaTime, float duration) {
-		return new Rect (Mathf.Lerp (minimapCamera.pixelRect.x, x, deltaTime / duration), Mathf.Lerp (minimapCamera.pixelRect.y, y, deltaTime / duration), Mathf.Lerp (minimapCamera.pixelRect.width, width, deltaTime / duration), Mathf.Lerp (minimapCamera.pixelRect.height, height, deltaTime / duration));
+		return new Rect (Mathf.Lerp (mapCamera.pixelRect.x, x, deltaTime / duration), Mathf.Lerp (mapCamera.pixelRect.y, y, deltaTime / duration), Mathf.Lerp (mapCamera.pixelRect.width, width, deltaTime / duration), Mathf.Lerp (mapCamera.pixelRect.height, height, deltaTime / duration));
 	}
 
 }

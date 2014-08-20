@@ -3,14 +3,14 @@
 --- !u!78 &1
 TagManager:
   tags:
+  - Game
   - GameManager
   - SpawnPoints
   - Terrain
   - Player
   - Self
-  - MinimapCamera
   - MinimapMask
-  - 
+  - MinimapCamera
   - 
   - 
   - 

@@ -96,14 +96,14 @@ public class MapLoader : HUDBase, IMapLoader {
 		}
 		this.moveCamera (player);
         // Disable auto minimap for now
-		if (this.mapHandler == null) {
+		/*if (this.mapHandler == null) {
 			return;
 		}
 		this.timer += Time.deltaTime;
 		if (timer > mapCheck) {
 			this.mapHandler.UpdateMap(player.position);
 			this.timer = 0;
-		}
+		}*/
         
 	}
 

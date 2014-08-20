@@ -240,6 +240,7 @@ GameObject:
   - 54: {fileID: 5400000}
   - 114: {fileID: 11400018}
   - 114: {fileID: 11400004}
+  - 114: {fileID: 11400010}
   m_Layer: 0
   m_Name: Car
   m_TagString: Player
@@ -453,7 +454,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100050}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -19.1098175, y: -.000428063155, z: -41.7780228}
+  m_LocalPosition: {x: -1.13240433, y: -.000428062223, z: 25.218956}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400048}
@@ -806,6 +807,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 2
   Button: 0
+--- !u!114 &11400010
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c02294c7f35749419c9b5b9140ce0fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EngineSoundClip: {fileID: 8300000, guid: f6b28ac9580924d34a1b03367c64f73b, type: 3}
+  enginePitch: 5
+  EngineVolume: 1
 --- !u!114 &11400014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -929,8 +944,8 @@ MonoBehaviour:
   - 2
   - 1.20000005
   changeGearAtRPM:
-  - 2500
-  - 3700
+  - 2700
+  - 3400
   timeToShiftGear: .100000001
   antiRollBars: 1
   antiRollBarStiffness: 5000

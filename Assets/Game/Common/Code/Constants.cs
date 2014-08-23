@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Constants {
 
-	// Paths
+    // Paths
     public static string PATH_GAME = "/Game";
 
 }

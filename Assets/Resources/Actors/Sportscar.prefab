@@ -755,6 +755,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e01728c55c533e74ba3788805ec5e649, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Character: 1
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -789,6 +790,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1e4e8deed9364b72b12ddb79bfeaee5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerBarTransform: {fileID: 0}
   TextFont: {fileID: 12800000, guid: 4daba60e302c7f54d8d4badee164583d, type: 3}
   FontSize: 20
   heightOffset: {x: -.5, y: 2, z: 0}

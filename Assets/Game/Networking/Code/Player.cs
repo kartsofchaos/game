@@ -30,6 +30,8 @@ public class Player : PlayerBase
         }
     }
 
+    public Character Character;
+
     private Team _team;
     public Team Team
     {
@@ -80,7 +82,7 @@ public class Player : PlayerBase
         _team = team;
     }
 
-    void OnHealthChanged()
+    public void OnHealthChanged()
     {
         if (_health <= 0)
         {

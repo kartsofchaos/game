@@ -8,7 +8,7 @@ using System.Collections;
 // ------------------------------------------------------------------------------------------
 public class HUDBase : MonoBehaviour
 {
-	Player m_Player;
+    private Player m_Player;
 	public Player Player
 	{
 		get
@@ -20,43 +20,98 @@ public class HUDBase : MonoBehaviour
 			return m_Player;
 		}
 	}
+
+    // Camera variable used to determine wether or not the player is in our view.
+    // If it is outside of our view, we may decide to not display it.
+    private Camera m_Camera;
+    public Camera Camera
+    {
+        get
+        {
+            if (m_Camera == null)
+            {
+                m_Camera = Camera.main;  // Select the current camera which is being used by the player.
+            }
+            return m_Camera;
+        }
+    }
 	
-	PlayerController m_Controller;
+	private PlayerController m_PlayerController;
 	public PlayerController PlayerController
 	{
 		get
 		{
-			if (m_Controller == null)
+			if (m_PlayerController == null)
 			{
-				m_Controller = transform.root.GetComponentInChildren<PlayerController>();
+				m_PlayerController = transform.root.GetComponentInChildren<PlayerController>();
 			}
-			return m_Controller;
+			return m_PlayerController;
 		}
 	}
-	
-	CarHandling m_Handling;
+
+    private CarHandling m_CarHandling;
 	public CarHandling CarHandling
 	{
 		get
 		{
-			if (m_Handling == null)
+			if (m_CarHandling == null)
 			{
-				m_Handling = transform.root.GetComponentInChildren<CarHandling>();
+				m_CarHandling = transform.root.GetComponentInChildren<CarHandling>();
 			}
-			return m_Handling;
+			return m_CarHandling;
 		}
 	}
-	
-	CarVisuals m_Visuals;
+
+    private CarVisuals m_CarVisuals;
 	public CarVisuals CarVisuals
 	{
 		get
 		{
-			if (m_Visuals == null)
+			if (m_CarVisuals == null)
 			{
-				m_Visuals = transform.root.GetComponentInChildren<CarVisuals>();
+				m_CarVisuals = transform.root.GetComponentInChildren<CarVisuals>();
 			}
-			return m_Visuals;
+			return m_CarVisuals;
 		}
 	}
+
+    private Transform m_CarTransform;
+    public Transform CarTransform
+    {
+        get
+        {
+            if (m_CarTransform == null)
+            {
+                m_CarTransform = CarHandling.transform;
+            }
+            return m_CarTransform;
+        }
+
+    }
+
+    private HealthBar m_HealthBar;
+    public HealthBar HealthBar
+    {
+        get
+        {
+            if (m_HealthBar == null)
+            {
+                m_HealthBar = transform.root.GetComponentInChildren<HealthBar>();
+            }
+            return m_HealthBar;
+        }
+    }
+
+    private PlayerBar m_PlayerBar;
+    public PlayerBar PlayerBar
+    {
+        get
+        {
+            if (m_PlayerBar == null)
+            {
+                m_PlayerBar = transform.root.GetComponentInChildren<PlayerBar>();
+            }
+            return m_PlayerBar;
+        }
+    }
 }

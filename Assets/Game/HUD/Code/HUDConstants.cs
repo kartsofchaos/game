@@ -15,10 +15,10 @@ public class HUDConstants {
     public static string PATH_HUD = Constants.PATH_GAME + "/HUD";
     public static string PATH_MAP_BUNDLE = "Data/mapData.dat";
     public static string PATH_MAP_SETTINGS = PATH_HUD + "/Code/Map/MapSettings.txt";
-    public static string PATH_MAP_MATERIALS = PATH_HUD + "/Materials/Map";
-    public static string PATH_MAP_MODELS = PATH_HUD + "/Models/Map";
-    public static string PATH_MAP_PREFABS = PATH_HUD + "/Prefabs/Map";
-    public static string PATH_MAP_TEXTURES = PATH_HUD + "/Textures/Map";
+    public static string PATH_MAP_MATERIALS = PATH_HUD + "/Resources/Materials/Map";
+	public static string PATH_MAP_MODELS = PATH_HUD + "/Resources/Models/Map";
+	public static string PATH_MAP_PREFABS = PATH_HUD + "/Resources/Prefabs/Map";
+	public static string PATH_MAP_TEXTURES = PATH_HUD + "/Resources/Textures/Map";
 
     // Map
     public static string MAP_SEGMENT_NAME = "MapSegment.mesh";

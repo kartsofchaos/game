@@ -11,8 +11,8 @@ TagManager:
   - Self
   - MinimapMask
   - MinimapCamera
-  - 
-  - 
+  - Red
+  - Blue
   - 
   - 
   - 
@@ -27,6 +27,9 @@ TagManager:
   - 
   - 
   - FxTemporaire
+  - 
+  - 
+  - 
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

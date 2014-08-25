@@ -4,10 +4,10 @@ using System.Collections;
 // Anti roll bars taken from http://forum.unity3d.com/threads/50643-How-to-make-a-physically-real-stable-car-with-WheelColliders
 // Anti-roll bars work by transfering some compression force from one spring to the opposite in the same axle. 
 // The amount of the transfered force depends on the difference in the suspension travel among the wheels.
-public class AntiRollBar
+public class CarAntiRollBar
 {
-    public Wheel wheelL;
-    public Wheel wheelR;
+    public CarWheel wheelL;
+    public CarWheel wheelR;
     public WheelHit hitL;
     public WheelHit hitR;
 

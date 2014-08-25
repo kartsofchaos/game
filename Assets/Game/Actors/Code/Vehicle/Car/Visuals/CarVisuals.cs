@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 // ------------------------------------------------------------------------------------------
@@ -47,7 +47,7 @@ public class CarVisuals : CarBase
         if (CarHandling.wheels == null)
             return;
 
-        foreach (Wheel w in CarHandling.wheels)
+        foreach (CarWheel w in CarHandling.wheels)
         {
             // Y Rotate the front wheels based on steering angle
             if (w.frontWheel)

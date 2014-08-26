@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 // Enums used by the controller
@@ -23,7 +23,7 @@ public class CarHandling : CarBase
     public bool frontWheelDrive             = false;                            // Front wheel drive
     public Transform[] frontWheels;
     public Transform[] rearWheels;
-    internal Wheel[] wheels;
+    internal CarWheel[] wheels;
     private float wheelCount;
 
     // Wheel friction Curves
@@ -57,7 +57,7 @@ public class CarHandling : CarBase
     // Anti roll-bars
     public bool antiRollBars                = true;                             // Boolean that determines wether or not the car has anti-roll bars
     public float antiRollBarStiffness       = 6000f;                            // The maximum force that the antiroll bars can transfer to the opposite wheel
-    private AntiRollBar[] antiRollBarList;
+    private CarAntiRollBar[] antiRollBarList;
     
     // Aero Dynamics
     public float frontalArea                = 2.0f;                             // The frontal area of the car that is taken into account for air resistance
@@ -113,7 +113,7 @@ public class CarHandling : CarBase
 	// ------------------------------------------------------------------------
     void Start()
     {
-        wheels = new Wheel[frontWheels.Length + frontWheels.Length];
+        wheels = new CarWheel[frontWheels.Length + frontWheels.Length];
         SetupWheelColliders();
         if (antiRollBars) SetupAntiRollBars();
         SetupCenterOfMass();
@@ -163,7 +163,7 @@ public class CarHandling : CarBase
 		
 		// Apply antiRollForce
 		if (antiRollBars)
-			foreach (AntiRollBar arb in antiRollBarList)
+			foreach (CarAntiRollBar arb in antiRollBarList)
 				arb.ApplyAntiRollForce();
 		
 		// Adjust friction curves based on track conditions
@@ -298,14 +298,14 @@ public class CarHandling : CarBase
     // ------------------------------------------------------------------------------
     private void SetupAntiRollBars()
     {
-        antiRollBarList = new AntiRollBar[2];
-        Wheel[] frontPair = new Wheel[2];
-        Wheel[] rearPair = new Wheel[2];
+        antiRollBarList = new CarAntiRollBar[2];
+        CarWheel[] frontPair = new CarWheel[2];
+        CarWheel[] rearPair = new CarWheel[2];
         int frontIndex = 0;
         int rearIndex = 0;
 
         // Divide the wheels into pairs that should be connected via anti roll bars
-        foreach (Wheel w in wheels)
+        foreach (CarWheel w in wheels)
         {
             if (w.frontWheel)
                 frontPair[frontIndex++] = w;
@@ -314,11 +314,11 @@ public class CarHandling : CarBase
         }
 
         // Connect the wheels pair wise
-        AntiRollBar arbFront = new AntiRollBar();
+        CarAntiRollBar arbFront = new CarAntiRollBar();
         arbFront.wheelL = frontPair[0];
         arbFront.wheelR = frontPair[1];
 
-        AntiRollBar arbRear = new AntiRollBar();
+        CarAntiRollBar arbRear = new CarAntiRollBar();
         arbRear.wheelL = rearPair[0];
         arbRear.wheelR = rearPair[1];
 
@@ -375,7 +375,7 @@ public class CarHandling : CarBase
 
         // Apply the final motor torque to our wheel colliders so they can generate
         // the traction force to push us forwards (using the wheel friction curves)
-        foreach (Wheel w in wheels)
+        foreach (CarWheel w in wheels)
         {
             if (w.frontWheel && frontWheelDrive || (w.rearWheel && (rearWheelDrive && !handbrakeOn)))
                 w.collider.motorTorque = motorTorque;
@@ -393,7 +393,7 @@ public class CarHandling : CarBase
         bool first = true;
 
         // Get the RPM of any of the drive wheels
-        foreach (Wheel w in wheels)
+        foreach (CarWheel w in wheels)
         {
             wheelRPM = w.collider.rpm;
 
@@ -434,7 +434,7 @@ public class CarHandling : CarBase
             return;
 
         // Apply to each wheel (4 wheel drive)
-        foreach (Wheel w in wheels)
+        foreach (CarWheel w in wheels)
         {
             // Handbrake
             if (handbrakeOn && w.rearWheel)
@@ -533,7 +533,7 @@ public class CarHandling : CarBase
         }
 
         // Update the curves of the wheels
-        foreach (Wheel w in wheels)
+        foreach (CarWheel w in wheels)
         {
             // If handbrake is on
             if (handbrakeOn)
@@ -580,7 +580,7 @@ public class CarHandling : CarBase
             if (Mathf.Abs(steering) < 0.01f) steering = 0.0f;
 
             // Loop through each wheel
-            foreach (Wheel w in wheels)
+            foreach (CarWheel w in wheels)
             {
                 // If its a front wheel, set its angle
                 if (w.frontWheel)
@@ -636,7 +636,7 @@ public class CarHandling : CarBase
     //			each wheel. It receives the transform (Game object assigned in the 
     //          inspector) and a boolean determening if it is a front wheel (turn wheel)
     // ------------------------------------------------------------------------------
-    Wheel SetupWheel(Transform wheelTransform, bool isFrontWheel)
+    CarWheel SetupWheel(Transform wheelTransform, bool isFrontWheel)
     {
         // Create a new game object to contain a wheel collider component
         GameObject go = new GameObject(wheelTransform.name + " Collider");
@@ -681,7 +681,7 @@ public class CarHandling : CarBase
         wc.forwardFriction = forwardsWFC;
 
         // Create a new Wheel structure to contain our info for this wheel
-        Wheel wheel = new Wheel();
+        CarWheel wheel = new CarWheel();
         wheel.collider = wc;
 
         // The true game object should be in a child object first transform
@@ -770,7 +770,7 @@ public class CarHandling : CarBase
     {
         canDrive = false;
         canSteer = false;
-        foreach (Wheel w in wheels)
+        foreach (CarWheel w in wheels)
         {
             if (w.collider.isGrounded)
             {
@@ -819,7 +819,7 @@ public class CarHandling : CarBase
     // Name : GetWheels()
     // Desc	: Returns an array with the Wheels
     // --------------------------------------------------------------------------------------------
-    public Wheel[] GetWheels()
+    public CarWheel[] GetWheels()
     {
         return wheels;
     }

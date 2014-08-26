@@ -24,11 +24,11 @@ public class SpawnFlag : MonoBehaviour {
             red.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
             red.transform.parent = master.transform;
 
-            flag = PhotonNetwork.InstantiateSceneObject("Flag", new Vector3(30,0.5f,0f), Quaternion.identity, 0, null);
+            flag = PhotonNetwork.InstantiateSceneObject("Prefabs/Flag", new Vector3(30,0.5f,0f), Quaternion.identity, 0, null);
             flag.transform.tag = "Blue";
             flag.transform.parent = blue.transform;
 
-            flag = PhotonNetwork.InstantiateSceneObject("Flag", new Vector3(-30, 0.5f, 0f), Quaternion.identity, 0, null);
+            flag = PhotonNetwork.InstantiateSceneObject("Prefabs/Flag", new Vector3(-30, 0.5f, 0f), Quaternion.identity, 0, null);
             flag.transform.tag = "Red";
             flag.transform.parent = red.transform;
         }

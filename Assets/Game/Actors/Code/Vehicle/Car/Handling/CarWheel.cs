@@ -2,7 +2,7 @@
 using System.Collections;
 
 // Class that represents a wheel and its collider
-public class Wheel
+public class CarWheel
 {
     public Transform wheelGraphic;
     public WheelCollider collider;

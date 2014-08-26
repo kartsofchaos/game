@@ -33,8 +33,9 @@ public class PlayerSpawner : MonoBehaviour
     public void CreateLocalPlayer(Team team)
     {
         // Notice the difference from PhotonNetwork.Instantiate to Unitys GameObject.Instantiate
-        GameObject newPlayerObject = PhotonNetwork.Instantiate("Actors/SportsCar", new Vector3(25f, 1f, -15f), Quaternion.identity, 0, new object[] { (int)team });
-        
+        GameObject newPlayerObject = PhotonNetwork.Instantiate("Prefabs/SportsCar", new Vector3(25f, 1f, -15f), Quaternion.identity, 0, new object[] { (int)team });
+
+
         // Spawn at the right place
         if (team == Team.Red)
         {
@@ -55,7 +56,7 @@ public class PlayerSpawner : MonoBehaviour
 		Camera.main.GetComponent<SmoothFollowCustom>().SetTarget( newPlayerObject.GetComponentInChildren<CarHandling>().transform );
 
 		// Instantiate a HUD for the player and place it in the local players hierharky
-		GameObject hud = Instantiate(Resources.Load("HUD/SportscarHUD")) as GameObject;
+		GameObject hud = Instantiate(Resources.Load("Prefabs/SportscarHUD")) as GameObject;
 		hud.transform.parent = newPlayerObject.transform;
     }
 

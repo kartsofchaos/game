@@ -11,6 +11,7 @@ public class MapHandler
     private readonly MapSegment[,] loadedSegments = new MapSegment[3, 3];
     private readonly int mapLayer;
 
+    private GameObject mapHolder;
     private Vector3 mapOffset;
     private Rect mapBounds;
 
@@ -31,10 +32,7 @@ public class MapHandler
     /// <param name="position">Position.</param>
     public void Start(Vector3 position)
     {
-        Debug.Log("xMin: " + mapSettings.xMin);
-        Debug.Log("xMax: " + mapSettings.xMax);
-        Debug.Log("zMin: " + mapSettings.zMin);
-        Debug.Log("zMax: " + mapSettings.zMax);
+        mapHolder = new GameObject(HUDConstants.LAYER_MAP);
         this.PrepareMapAt(position);
     }
 
@@ -78,10 +76,12 @@ public class MapHandler
                 var go = GameObject.Instantiate(segment) as GameObject;
                 go.transform.position = new Vector3(x - mapOffset.x, mapOffset.y, z - mapOffset.z);
                 go.layer = mapLayer;
+                go.transform.parent = mapHolder.transform;
             }
 
         }
 
+        // Disable auto-loading feature
         /*
         this.mapBounds = this.GetMapBoundsForPosition(position);
         Debug.Log("Current map bounds: " + mapBounds.xMin + "," + mapBounds.xMax + "," + mapBounds.xMax + "," + mapBounds.yMax + ")");
@@ -243,7 +243,6 @@ public class MapHandler
     {
         // Get center segment
         var segmentCoord = this.GetSegmentCoorsForPosition(x, z);
-        //Debug.Log("Center segment, center coord: " + segmentCoord);
 
         // Create a starting point with coords and offsets
         Rect bounds = new Rect();
@@ -251,13 +250,6 @@ public class MapHandler
         bounds.xMax = segmentCoord.x + mapSettings.length;
         bounds.yMin = segmentCoord.y - mapSettings.width;
         bounds.yMax = segmentCoord.y + mapSettings.width;
-        //Debug.Log("Theorectial bounds: " + bounds);
-        /*
-        bounds.xMin = Mathf.Max(mapSettings.xMin, bounds.xMin);
-        bounds.yMin = Mathf.Max(mapSettings.zMin, bounds.yMin);
-        bounds.xMax = Mathf.Min(mapSettings.xMax, bounds.xMax);
-        bounds.yMax = Mathf.Min(mapSettings.zMax, bounds.yMax);*/
-        //Debug.Log("Bounds: (" + bounds.xMin + "," + bounds.xMax + "," + bounds.yMin + "," + bounds.yMax + ")");
         return bounds;
     }
 
@@ -272,8 +264,6 @@ public class MapHandler
         bool xNeg = false;
         bool zNeg = false;
 
-        //Debug.Log("GetSegmentCoorsForPosition: (" + x + "," + z + ")");
-
         if (x < 0)
         {
             x *= -1;
@@ -285,8 +275,6 @@ public class MapHandler
             zNeg = true;
         }
 
-        //Debug.Log("GetSegmentCoorsForPosition: (" + x + "," + z + ")");
-
         // Get bottom-left coord
         var segmentX = (int)(x / mapSettings.length);
         var segmentZ = (int)(z / mapSettings.width);
@@ -294,7 +282,7 @@ public class MapHandler
         // Add half of length to reach center
         var segCoordX = segmentX * mapSettings.length + mapOffset.x;
         var segCoordZ = segmentZ * mapSettings.width + mapOffset.z;
-        //Debug.Log("New-GetSegmentCoorsForPosition: (" + segCoordX + "," + segCoordZ + ")");
+
         if (xNeg)
             segCoordX *= -1;
         if (zNeg)

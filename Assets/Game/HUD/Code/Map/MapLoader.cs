@@ -3,30 +3,31 @@ using System.Collections;
 
 public class MapLoader : HUDBase, IMapLoader {
 
-    private Transform player;		// Used to fetch the position of the player
-    public Transform playerIcon;
-    public Transform mask;
-    
-    internal bool fullscreen;
-    public bool toggleFullscreen;
+    // Transforms
+    public Transform mapPlayerIconTransform;
+    public Transform minimapMaskTransform;
+    private Transform playerTransform;  // Used to fetch the reference of the player
+    private Transform cameraTransform;  // Used to fetch the reference of the player
+
+    // Camera
+    private Camera mapCamera;
+
+    // Flags
+    private bool fullscreen;
+    private bool userWantsToToggle;
     private bool toggling;
 
-    private MapHandler mapHandler;
+    // Snapshots
+    private Vector3 snapshotPosition;
+    private Vector3 snapshotMaskPosition;
+    private Vector3 snapshotRotation;
 
-    private float mapCheck = 1f;
-    private float timer = 0;
-
-    private Vector3 newPosition;
-    private Vector3 newMaskPosition;
-    private Vector3 newRotation;
-
+    // Durations
     private float rotationDuration = 0.3f;
     private float zoomDuration = 0.7f;
     private float moveDuration = 0.5f;
 
-    private Camera mapCamera;
-    private GameObject mapMask;
-    
+    // Map preferences
     private Vector2 minimapPosition;
     private Vector2 minimapSize;
     private float minimapZoom;
@@ -34,34 +35,40 @@ public class MapLoader : HUDBase, IMapLoader {
     private Vector2 mapSize;
     private float mapZoom;
 
-    void Start() {
+    // Auto-loading feature
+    private MapHandler mapHandler;
+    private float mapCheck = 1f;
+    private float timer = 0;
+
+    void Start()
+    {
+        // Set references
+        cameraTransform = this.transform;
+        playerTransform = CarHandling.transform;
+
         // Set init values
         fullscreen = false;
-        toggleFullscreen = false;
+        userWantsToToggle = false;
         toggling = false;
 
-        // Setup map camera
-        mapCamera = gameObject.camera;
-        mapCamera.clearFlags = CameraClearFlags.Depth;
-        mapMask = GameObject.FindGameObjectWithTag (HUDConstants.TAG_MAP_MASK);
-        mapMask.gameObject.SetActive(true);
-        
-        // Setup map
+        // Setup fullscreen map preferences
         mapPosition.x = Screen.width * 0.2f;
         mapPosition.y = Screen.height * 0.1f;
         mapSize.x = Screen.width * 0.6f;
         mapSize.y = Screen.height * 0.8f;
         mapZoom = 106f;
 
-        // Setup minimap
-        minimapPosition.x = mapCamera.pixelRect.x;
-        minimapPosition.y = mapCamera.pixelRect.y;
-        minimapSize.x = mapCamera.pixelRect.width;
-        minimapSize.y = mapCamera.pixelRect.height;
-        minimapZoom = mapCamera.orthographicSize;
+        // Setup minimap preferences
+        minimapPosition.x = HUDConstants.POSITION_MINIMAP_X;
+        minimapPosition.y = HUDConstants.POSITION_MINIMAP_Y;
+        minimapSize.x = HUDConstants.SIZE_MINIMAP_WIDTH;
+        minimapSize.y = HUDConstants.SIZE_MINIMAP_HEIGHT;
+        minimapZoom = 30f;
 
-        // Get player
-        player = CarHandling.transform;
+        // Setup map camera
+        mapCamera = gameObject.camera;
+        mapCamera.clearFlags = CameraClearFlags.Depth;
+        mapCamera.pixelRect = new Rect(minimapPosition.x, minimapPosition.y, minimapSize.x, minimapSize.y);
 
         var bundle = AssetBundle.CreateFromFile(string.Format("{0}/{1}", System.IO.Directory.GetCurrentDirectory(), HUDConstants.PATH_MAP_BUNDLE));
         if (bundle == null) {
@@ -69,32 +76,35 @@ public class MapLoader : HUDBase, IMapLoader {
             return;
         }
         var settingsData = bundle.mainAsset as TextAsset;
-        //string s = "name=segment\nlength=100\nwidth=100\nxMin=-50\nxMax=50\nzMin=-50\nzMax=50";
         var mapSettings = new MapSettings(settingsData.text);
 
         this.mapHandler = new MapHandler(this, bundle, mapSettings, LayerMask.NameToLayer(HUDConstants.LAYER_MAP));
-        // Disable auto minimap for now
-        this.mapHandler.Start(player.position);
+        this.mapHandler.Start(playerTransform.position);
     }
 
-    // Optmization, only move camera when needed.
     void Update() {
         // Get the transform from the player. If we have not yet been placed in the player hierarki, return and wait
         // for the next update
-        if (player == null) 
-            player = CarHandling.transform;
-        if (player == null)
+        if (playerTransform == null) 
+            playerTransform = CarHandling.transform;
+        if (playerTransform == null)
             return;
 
-        if (Input.GetButtonDown (HUDConstants.KEY_MAP)) {
-            toggleFullscreen = true;
-            if (!fullscreen) {
-                showMapWindow();
-            } else {
-                hideMapWindow();
-            }
+        // Update position and size of camera every frame to adjust to resizing window
+        if (!toggling)
+        {
+            if (fullscreen)
+                mapCamera.pixelRect = new Rect(mapPosition.x, mapPosition.y, mapSize.x, mapSize.y);
+            else
+                mapCamera.pixelRect = new Rect(minimapPosition.x, minimapPosition.y, minimapSize.x, minimapSize.y);
         }
-        this.moveCamera (player);
+
+        // Toggle fullscreen map on user input
+        if (Input.GetButtonDown (HUDConstants.KEY_MAP)) {
+            toggleFullscreenMap(playerTransform);
+        }
+        this.updateCamera(playerTransform);
+        
         // Disable auto minimap for now
         /*if (this.mapHandler == null) {
             return;
@@ -107,90 +117,135 @@ public class MapLoader : HUDBase, IMapLoader {
         
     }
 
-    void moveCamera (Transform player)
+    void updateCamera(Transform t)
     {
-        if (!fullscreen) {
-            newPosition = new Vector3 (player.position.x, transform.position.y, player.position.z);
-            newMaskPosition = new Vector3 (player.position.x, mask.transform.position.y, player.position.z);
-            newRotation = new Vector3 (this.transform.eulerAngles.x, player.transform.eulerAngles.y, this.transform.eulerAngles.z);
-        }
-        playerIcon.transform.position = new Vector3 (player.position.x, playerIcon.position.y, player.position.z);
-        playerIcon.transform.eulerAngles = new Vector3 (playerIcon.transform.eulerAngles.x, player.eulerAngles.y, playerIcon.transform.eulerAngles.z);
-        if (toggleFullscreen) {
-            StopCoroutine("toggle");
-            StartCoroutine("toggle");
-            toggleFullscreen = false;
-        } else if (!toggling) {
-            mask.transform.position = newMaskPosition;
-            this.transform.position = newPosition;
-            this.transform.eulerAngles = newRotation;
-        }
-    }
+        Vector3 tmp;
 
-    private IEnumerator toggle() {
-        toggling = true;
-        float deltaT = 0;
-        while (deltaT < zoomDuration) {
-            deltaT += Time.deltaTime;
-            yield return true;
-            this.transform.position = Vector3.Lerp (this.transform.position, newPosition, deltaT / zoomDuration);
-            mask.transform.position = Vector3.Lerp (mask.transform.position, newMaskPosition, deltaT / zoomDuration);
-            this.transform.eulerAngles = Vector3.Lerp (this.transform.eulerAngles, newRotation, deltaT / rotationDuration);
+        // Update map icon position (y = unchanged)
+        tmp = mapPlayerIconTransform.transform.position;
+        tmp.x = t.position.x;
+        tmp.z = t.position.z;
+        mapPlayerIconTransform.transform.position = tmp;
+
+        // Update map icon rotation (x,z = unchanged)
+        tmp = mapPlayerIconTransform.eulerAngles;
+        tmp.y = t.eulerAngles.y;
+        mapPlayerIconTransform.eulerAngles = tmp;
+
+        // Minimap snapshot used as reference during toggle (the fullscreen 
+        // snapshot are known and do not need to be uptades every frame)
+        if (!fullscreen) {
+            // Camera and mask position
+            tmp = t.position;
+            tmp.y = cameraTransform.position.y;
+            snapshotPosition = tmp;
+            tmp.y = minimapMaskTransform.position.y;
+            snapshotMaskPosition = tmp;
+
+            // Camera rotation
+            tmp = cameraTransform.eulerAngles;
+            tmp.y = t.transform.eulerAngles.y;
+            snapshotRotation = tmp;
         }
-        toggling = false;
+
+        // Update transform if not in middle of a toggle
+        if (!toggling) {
+            cameraTransform.position = snapshotPosition;
+            cameraTransform.eulerAngles = snapshotRotation;
+            minimapMaskTransform.transform.position = snapshotMaskPosition;
+        }
     }
 
     public void Unload() {
-        this.mapHandler.Unload ();
+        this.mapHandler.Unload();
         this.mapHandler = null;
     }
 
     public void StartAsyncMethod(IEnumerator method) {
         this.StartCoroutine (method);
     }
-    
-    private void hideMapWindow() {
-        fullscreen = false;
-        StopCoroutine("zoomOut");
-        StopCoroutine("moveToMap");
-        StartCoroutine("zoomIn");
-        StartCoroutine("moveToMinimap");
+
+    private void toggleFullscreenMap(Transform t)
+    {
+        // Lerp player position
+        StopCoroutine("CameraSmoothTransition");
+        StartCoroutine("CameraSmoothTransition");
+        if (fullscreen)
+        {
+            // Lerp camera
+            StopCoroutine("CameraZoomFullscrenMap");
+            StopCoroutine("CameraMoveMap");
+            StartCoroutine("CameraZoomMinimap");
+            StartCoroutine("CameraMoveMinimap");
+        }
+        else
+        {
+            Vector3 tmp;
+            // Fullscreen map snapshot used as reference during toggle
+
+            // Camera and mask position
+            tmp = cameraTransform.transform.position;
+            tmp.x = 0f;
+            tmp.z = 0f;
+            snapshotPosition = tmp;
+            tmp.y = minimapMaskTransform.transform.position.y;
+            snapshotMaskPosition = tmp;
+
+            // Camera rotation
+            tmp = cameraTransform.eulerAngles;
+            tmp.y = 0f;
+            snapshotRotation = tmp;
+
+            // Lerp camera
+            StopCoroutine("CameraZoomMinimap");
+            StopCoroutine("CameraMoveMinimap");
+            StartCoroutine("CameraZoomFullscrenMap");
+            StartCoroutine("CameraMoveMap");
+        }
+        fullscreen = !fullscreen;
+
     }
-    
-    private void showMapWindow() {
-        fullscreen = true;
-        newPosition = new Vector3 (0f, transform.position.y, 0f);
-        newMaskPosition = new Vector3 (0f, mask.transform.position.y, 0f);
-        newRotation = new Vector3 (this.transform.eulerAngles.x, 0f, this.transform.eulerAngles.z);
-        StopCoroutine("zoomIn");
-        StopCoroutine("moveToMinimap");
-        StartCoroutine("zoomOut");
-        StartCoroutine("moveToMap");
+
+    private IEnumerator CameraSmoothTransition()
+    {
+        toggling = true;
+        float deltaT = 0;
+        while (deltaT < zoomDuration)
+        {
+            deltaT += Time.deltaTime;
+            yield return true;
+            cameraTransform.position = Vector3.Lerp(cameraTransform.position, snapshotPosition, deltaT / zoomDuration);
+            cameraTransform.eulerAngles = Vector3.Lerp(cameraTransform.eulerAngles, snapshotRotation, deltaT / rotationDuration);
+            minimapMaskTransform.transform.position = Vector3.Lerp(minimapMaskTransform.transform.position, snapshotMaskPosition, deltaT / zoomDuration);
+
+        }
+        toggling = false;
     }
-    
-    private IEnumerator zoomIn() {
+
+    private IEnumerator CameraZoomMinimap() {
         float deltaT = 0;
         if (mapCamera.orthographicSize <= mapZoom) {
             while ( deltaT < zoomDuration) {
                 deltaT += Time.deltaTime;
                 yield return true;
                 mapCamera.orthographicSize = Mathf.Lerp(mapCamera.orthographicSize, minimapZoom, deltaT / zoomDuration);
-                mapMask.transform.localScale = Vector3.Lerp(mapMask.transform.localScale, new Vector3(3000f, mapMask.transform.localScale.y, 3000f), deltaT / zoomDuration);
+                minimapMaskTransform.transform.localScale = Vector3.Lerp(minimapMaskTransform.transform.localScale, new Vector3(3000f, minimapMaskTransform.transform.localScale.y, 3000f), deltaT / zoomDuration);
             }
         }
     }
-    
-    private IEnumerator zoomOut() {
+
+    private IEnumerator CameraZoomFullscrenMap()
+    {
         float deltaT = 0;
         while (deltaT < zoomDuration) {
             deltaT += Time.deltaTime;
             yield return true;
-            mapCamera.orthographicSize = Mathf.Lerp (mapCamera.orthographicSize, mapZoom, deltaT / zoomDuration);
-            mapMask.transform.localScale = Vector3.Lerp (mapMask.transform.localScale, new Vector3 (24000f, mapMask.transform.localScale.y, 24000f), deltaT / zoomDuration);
+            mapCamera.orthographicSize = Mathf.Lerp(mapCamera.orthographicSize, mapZoom, deltaT / zoomDuration);
+            minimapMaskTransform.transform.localScale = Vector3.Lerp(minimapMaskTransform.transform.localScale, new Vector3(24000f, minimapMaskTransform.transform.localScale.y, 24000f), deltaT / zoomDuration);
         }
     }
     
-    private IEnumerator moveToMap() {
+    private IEnumerator CameraMoveMap() {
         float deltaT = 0;
         while (deltaT < moveDuration) {
             deltaT += Time.deltaTime;
@@ -198,8 +253,9 @@ public class MapLoader : HUDBase, IMapLoader {
             mapCamera.pixelRect = createMinimapLerp(mapPosition.x, mapPosition.y, mapSize.x, mapSize.y, deltaT , moveDuration);
         }
     }
-    
-    private IEnumerator moveToMinimap() {
+
+    private IEnumerator CameraMoveMinimap()
+    {
         float deltaT = 0;
         while (deltaT < moveDuration) {
             deltaT += Time.deltaTime;
@@ -209,7 +265,7 @@ public class MapLoader : HUDBase, IMapLoader {
     }
 
     private Rect createMinimapLerp(float x, float y, float width, float height, float deltaTime, float duration) {
-        return new Rect (Mathf.Lerp (mapCamera.pixelRect.x, x, deltaTime / duration), Mathf.Lerp (mapCamera.pixelRect.y, y, deltaTime / duration), Mathf.Lerp (mapCamera.pixelRect.width, width, deltaTime / duration), Mathf.Lerp (mapCamera.pixelRect.height, height, deltaTime / duration));
+        return new Rect(Mathf.Lerp(mapCamera.pixelRect.x, x, deltaTime / duration), Mathf.Lerp(mapCamera.pixelRect.y, y, deltaTime / duration), Mathf.Lerp(mapCamera.pixelRect.width, width, deltaTime / duration), Mathf.Lerp(mapCamera.pixelRect.height, height, deltaTime / duration));
     }
 
 }

@@ -1,12 +1,12 @@
 using UnityEngine;
 using System.Collections;
 
-public class MapLoader : HUDBase, IMapLoader {
+public class MapCamera : HUDBase, IMapLoader {
 
     // Transforms
+    public Transform target;
     public Transform mapPlayerIconTransform;
     public Transform minimapMaskTransform;
-    private Transform playerTransform;  // Used to fetch the reference of the player
     private Transform cameraTransform;  // Used to fetch the reference of the player
 
     // Camera
@@ -44,7 +44,6 @@ public class MapLoader : HUDBase, IMapLoader {
     {
         // Set references
         cameraTransform = this.transform;
-        playerTransform = CarHandling.transform;
 
         // Set init values
         fullscreen = false;
@@ -59,10 +58,10 @@ public class MapLoader : HUDBase, IMapLoader {
         mapZoom = 106f;
 
         // Setup minimap preferences
-        minimapPosition.x = HUDConstants.POSITION_MINIMAP_X;
-        minimapPosition.y = HUDConstants.POSITION_MINIMAP_Y;
-        minimapSize.x = HUDConstants.SIZE_MINIMAP_WIDTH;
-        minimapSize.y = HUDConstants.SIZE_MINIMAP_HEIGHT;
+        minimapPosition.x = CameraConstants.POSITION_MINIMAP_X;
+        minimapPosition.y = CameraConstants.POSITION_MINIMAP_Y;
+        minimapSize.x = CameraConstants.SIZE_MINIMAP_WIDTH;
+        minimapSize.y = CameraConstants.SIZE_MINIMAP_HEIGHT;
         minimapZoom = 30f;
 
         // Setup map camera
@@ -70,26 +69,12 @@ public class MapLoader : HUDBase, IMapLoader {
         mapCamera.clearFlags = CameraClearFlags.Depth;
         mapCamera.pixelRect = new Rect(minimapPosition.x, minimapPosition.y, minimapSize.x, minimapSize.y);
 
-        var bundle = AssetBundle.CreateFromFile(string.Format("{0}/{1}", System.IO.Directory.GetCurrentDirectory(), HUDConstants.PATH_MAP_BUNDLE));
-        if (bundle == null) {
-            Debug.Log("Settings data not found!");
-            return;
-        }
-        var settingsData = bundle.mainAsset as TextAsset;
-        var mapSettings = new MapSettings(settingsData.text);
-
-        this.mapHandler = new MapHandler(this, bundle, mapSettings, LayerMask.NameToLayer(HUDConstants.LAYER_MAP));
-        this.mapHandler.Start(playerTransform.position);
     }
 
     void Update() {
-        // Get the transform from the player. If we have not yet been placed in the player hierarki, return and wait
-        // for the next update
-        if (playerTransform == null) 
-            playerTransform = CarHandling.transform;
-        if (playerTransform == null)
+        if (!target)
             return;
-
+        
         // Update position and size of camera every frame to adjust to resizing window
         if (!toggling)
         {
@@ -100,11 +85,12 @@ public class MapLoader : HUDBase, IMapLoader {
         }
 
         // Toggle fullscreen map on user input
-        if (Input.GetButtonDown (HUDConstants.KEY_MAP)) {
-            toggleFullscreenMap(playerTransform);
+        if (Input.GetButtonDown(HUDConstants.KEY_MAP))
+        {
+            toggleFullscreenMap(target);
         }
-        this.updateCamera(playerTransform);
-        
+        this.updateCamera(target);
+
         // Disable auto minimap for now
         /*if (this.mapHandler == null) {
             return;
@@ -154,6 +140,23 @@ public class MapLoader : HUDBase, IMapLoader {
             cameraTransform.eulerAngles = snapshotRotation;
             minimapMaskTransform.transform.position = snapshotMaskPosition;
         }
+    }
+
+    public void setTarget(Transform target)
+    {
+        this.target = target;
+
+        var bundle = AssetBundle.CreateFromFile(string.Format("{0}/{1}", System.IO.Directory.GetCurrentDirectory(), HUDConstants.PATH_MAP_BUNDLE));
+        if (bundle == null)
+        {
+            Debug.Log("Settings data not found!");
+            return;
+        }
+        var settingsData = bundle.mainAsset as TextAsset;
+        var mapSettings = new MapSettings(settingsData.text);
+
+        this.mapHandler = new MapHandler(this, bundle, mapSettings, LayerMask.NameToLayer(HUDConstants.LAYER_MAP));
+        this.mapHandler.Start(target.position);
     }
 
     public void Unload() {

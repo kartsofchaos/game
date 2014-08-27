@@ -6,10 +6,6 @@ public class HUDConstants {
     // Keys
     public static string KEY_MAP = "Map";
 
-    // Tags
-    public static string TAG_MAP_CAMERA = "MapCamera";
-    public static string TAG_MINIMAP_MASK = "MinimapMask";
-
     // Layers
     public static string LAYER_MAP = "Map";
 
@@ -26,9 +22,5 @@ public class HUDConstants {
     public static string MAP_SEGMENT_NAME = "MapSegment.mesh";
     public static string MAP_SEGMENT_PATTERN = "{0}-{1}.{2}";
     public static float MAP_HEIGHT = 0;
-    public static int POSITION_MINIMAP_X = 0;
-    public static int POSITION_MINIMAP_Y = 0;
-    public static int SIZE_MINIMAP_HEIGHT = 400;
-    public static int SIZE_MINIMAP_WIDTH = 400;
 
 }

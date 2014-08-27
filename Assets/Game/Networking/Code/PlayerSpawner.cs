@@ -50,15 +50,15 @@ public class PlayerSpawner : MonoBehaviour
  //       Player newPlayer = newPlayerObject.GetComponentInChildren<Player>();
 //        newPlayer.SetTeam( team );
 
+        MapDrawer mapDrawer = newPlayerObject.AddComponent<MapDrawer>();
+        mapDrawer.texture = Resources.Load("Textures/Map/MapArrowWhite") as Texture2D;
+
         // Init cameras
         GameObject mainCamera = GameObject.FindGameObjectWithTag(CameraConstants.TAG_MAIN_CAMERA);
         mainCamera.GetComponent<SmoothFollowCustom>().SetTarget(newPlayerObject.GetComponentInChildren<CarHandling>().transform);
         GameObject mapCamera = GameObject.FindGameObjectWithTag(CameraConstants.TAG_MAP_CAMERA);
         mapCamera.GetComponent<MapCamera>().setTarget(newPlayerObject.GetComponentInChildren<CarHandling>().transform);
-        GameObject mpi = Instantiate(Resources.Load("Prefabs/MapPlayerIcon")) as GameObject;
-        GameObject mm = Instantiate(Resources.Load("Prefabs/MinimapMask")) as GameObject;
-        mapCamera.GetComponent<MapCamera>().mapPlayerIconTransform = mpi.transform;
-        mapCamera.GetComponent<MapCamera>().minimapMaskTransform = mm.transform;
+
     }
 
 }

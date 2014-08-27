@@ -5,9 +5,7 @@ public class MapCamera : HUDBase, IMapLoader {
 
     // Transforms
     public Transform target;
-    public Transform mapPlayerIconTransform;
-    public Transform minimapMaskTransform;
-    private Transform cameraTransform;  // Used to fetch the reference of the player
+    private Transform cameraTransform;
 
     // Camera
     private Camera mapCamera;
@@ -107,17 +105,6 @@ public class MapCamera : HUDBase, IMapLoader {
     {
         Vector3 tmp;
 
-        // Update map icon position (y = unchanged)
-        tmp = mapPlayerIconTransform.transform.position;
-        tmp.x = t.position.x;
-        tmp.z = t.position.z;
-        mapPlayerIconTransform.transform.position = tmp;
-
-        // Update map icon rotation (x,z = unchanged)
-        tmp = mapPlayerIconTransform.eulerAngles;
-        tmp.y = t.eulerAngles.y;
-        mapPlayerIconTransform.eulerAngles = tmp;
-
         // Minimap snapshot used as reference during toggle (the fullscreen 
         // snapshot are known and do not need to be uptades every frame)
         if (!fullscreen) {
@@ -125,8 +112,6 @@ public class MapCamera : HUDBase, IMapLoader {
             tmp = t.position;
             tmp.y = cameraTransform.position.y;
             snapshotPosition = tmp;
-            tmp.y = minimapMaskTransform.position.y;
-            snapshotMaskPosition = tmp;
 
             // Camera rotation
             tmp = cameraTransform.eulerAngles;
@@ -138,7 +123,6 @@ public class MapCamera : HUDBase, IMapLoader {
         if (!toggling) {
             cameraTransform.position = snapshotPosition;
             cameraTransform.eulerAngles = snapshotRotation;
-            minimapMaskTransform.transform.position = snapshotMaskPosition;
         }
     }
 
@@ -191,8 +175,6 @@ public class MapCamera : HUDBase, IMapLoader {
             tmp.x = 0f;
             tmp.z = 0f;
             snapshotPosition = tmp;
-            tmp.y = minimapMaskTransform.transform.position.y;
-            snapshotMaskPosition = tmp;
 
             // Camera rotation
             tmp = cameraTransform.eulerAngles;
@@ -219,8 +201,6 @@ public class MapCamera : HUDBase, IMapLoader {
             yield return true;
             cameraTransform.position = Vector3.Lerp(cameraTransform.position, snapshotPosition, deltaT / zoomDuration);
             cameraTransform.eulerAngles = Vector3.Lerp(cameraTransform.eulerAngles, snapshotRotation, deltaT / rotationDuration);
-            minimapMaskTransform.transform.position = Vector3.Lerp(minimapMaskTransform.transform.position, snapshotMaskPosition, deltaT / zoomDuration);
-
         }
         toggling = false;
     }
@@ -232,7 +212,6 @@ public class MapCamera : HUDBase, IMapLoader {
                 deltaT += Time.deltaTime;
                 yield return true;
                 mapCamera.orthographicSize = Mathf.Lerp(mapCamera.orthographicSize, minimapZoom, deltaT / zoomDuration);
-                minimapMaskTransform.transform.localScale = Vector3.Lerp(minimapMaskTransform.transform.localScale, new Vector3(3000f, minimapMaskTransform.transform.localScale.y, 3000f), deltaT / zoomDuration);
             }
         }
     }
@@ -244,7 +223,6 @@ public class MapCamera : HUDBase, IMapLoader {
             deltaT += Time.deltaTime;
             yield return true;
             mapCamera.orthographicSize = Mathf.Lerp(mapCamera.orthographicSize, mapZoom, deltaT / zoomDuration);
-            minimapMaskTransform.transform.localScale = Vector3.Lerp(minimapMaskTransform.transform.localScale, new Vector3(24000f, minimapMaskTransform.transform.localScale.y, 24000f), deltaT / zoomDuration);
         }
     }
     

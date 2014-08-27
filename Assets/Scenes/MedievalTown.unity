@@ -395,7 +395,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  mapPlayerIconTransform: {fileID: 0}
   minimapMaskTransform: {fileID: 0}
 --- !u!92 &995429979
 Behaviour:

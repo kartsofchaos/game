@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 
@@ -51,7 +51,7 @@ public class PlayerSpawner : MonoBehaviour
 //        newPlayer.SetTeam( team );
 
         MapDrawer mapDrawer = newPlayerObject.AddComponent<MapDrawer>();
-        mapDrawer.texture = Resources.Load("Textures/Map/MapArrowWhite") as Texture2D;
+        mapDrawer.mainTexture = Resources.Load("Textures/Map/MapArrowWhite") as Texture2D;
 
         // Init cameras
         GameObject mainCamera = GameObject.FindGameObjectWithTag(CameraConstants.TAG_MAIN_CAMERA);

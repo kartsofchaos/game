@@ -3,66 +3,90 @@ using System.Collections;
 
 public class MapDrawer : MonoBehaviour {
 
-    private GameObject textureObject;
-    private Transform textureTransform;
-    public Texture2D texture;
-    public bool navigatable = false;
-    public Texture2D nagivationTexture;
+	// Map object
+	private GameObject _gameObject;
+    private Transform _transform;
+	private Transform _parentTransform;
+	public Texture2D mainTexture;
 
-    private GameObject cameraMapObject;
+	// Camera
+	private GameObject cameraMapObject;
+	private MapCamera mapCamera;
     private Camera cameraMap;
-    private Transform targetTransform;
+
+	// Navigation
+	public bool navigatable = false;
+	public Texture2D navigationTexture;
+	private float minimapViewRange;
+	private Transform targetTransform;
+	private bool lastSeenInsideViewRange = true;
 
     // Use this for initialization
     void Start () {
 
         cameraMapObject = GameObject.FindGameObjectWithTag(CameraConstants.TAG_MAP_CAMERA);
         cameraMap = cameraMapObject.camera;
-        targetTransform = cameraMapObject.GetComponent<MapCamera>().target.transform;
+		mapCamera = cameraMapObject.GetComponent<MapCamera>();
 
         // Create a cylinder game object and assign it to the map layer
-        textureObject = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
-        textureObject.name = "MapItem";
-        textureObject.layer = LayerMask.NameToLayer(HUDConstants.LAYER_MAP);
+        _gameObject = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+        _gameObject.name = "MapItem";
+        _gameObject.layer = LayerMask.NameToLayer(HUDConstants.LAYER_MAP);
 
         // Transform properties
-        textureTransform = textureObject.transform;
+		_transform = _gameObject.transform;
+		_transform.parent = gameObject.transform;
+		_parentTransform = _transform.parent.transform;
 
-        // TODO: Fix player transform
-        //textureTransform.parent = gameObject.transform;
-        //textureTransform.localScale = new Vector3(4f, 0f, 4f);
-        // For now:
-        textureTransform.parent = gameObject.GetComponentInChildren<CarHandling>().transform;
-        textureTransform.localScale = new Vector3(10f, 0f, 10f);
-
-        textureTransform.localPosition = new Vector3(0f, 1f, 0f);
+        _transform.localScale = new Vector3(5f, 0f, 5f);
+		_transform.localPosition = Vector3.up;
+		_transform.localEulerAngles = Vector3.zero;
 
         // Add texture
-        Material mat = textureObject.renderer.material;
-        mat.SetTexture("_MainTex", texture);
+        Material mat = _gameObject.renderer.material;
+        mat.SetTexture("_MainTex", mainTexture);
         mat.shader = Shader.Find("Unlit/Transparent");
-        Destroy(textureObject.collider);
+        Destroy(_gameObject.collider);
     }
     
     // Update is called once per frame
-    void Update () {
-        if (!navigatable)
-            return;
+    void OnGUI () {
 
-        if (!targetTransform) {
-            Debug.LogWarning("Map camera has no target!");
-            return;
-        }
-        
-        if (Vector2.Distance(XZ(textureTransform.position), XZ(targetTransform.position)) > camera.orthographicSize)
-        {
-            Debug.Log("Out of view");
-        }
-    }
+		// Only for navigatable items
+		if (!navigatable)
+			return;
 
-    public Vector2 XZ(this Vector3 v)
-    {
-        return new Vector2(v.x, v.z);
-    }
+		if (!targetTransform) {
+			if (mapCamera.target != null)
+				targetTransform = mapCamera.target.transform;
+			return;
+		}
 
+		Vector3 heading = targetTransform.position - _parentTransform.position;
+		heading.y = 0;
+		float distance = Mathf.Abs(heading.magnitude);
+
+		minimapViewRange = cameraMap.orthographicSize;
+		// Render a navigation object if outside view range
+		if (distance > minimapViewRange)
+		{
+			// If still outside view range, do not update texture unnecessarily
+			if (lastSeenInsideViewRange)
+				_gameObject.renderer.material.SetTexture("_MainTex", navigationTexture);
+			lastSeenInsideViewRange = false;
+			Vector3 direction = heading / distance;
+			_transform.position = new Vector3(targetTransform.position.x - direction.x * (minimapViewRange - HUDConstants.MINIMAP_BOUND_PADDING), _transform.position.y, targetTransform.position.z - direction.z * (minimapViewRange - HUDConstants.MINIMAP_BOUND_PADDING));
+			_transform.LookAt(_parentTransform);
+
+		}
+		// If still within view range, do not update texture
+		else if (!lastSeenInsideViewRange)
+		{
+			lastSeenInsideViewRange = true;
+			_gameObject.renderer.material.SetTexture("_MainTex", mainTexture);
+			_transform.localPosition = Vector3.up;
+			_transform.localEulerAngles = Vector3.zero;
+
+		}
+    }	
 }

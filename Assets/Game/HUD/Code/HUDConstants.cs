@@ -22,5 +22,6 @@ public class HUDConstants {
     public static string MAP_SEGMENT_NAME = "MapSegment.mesh";
     public static string MAP_SEGMENT_PATTERN = "{0}-{1}.{2}";
     public static float MAP_HEIGHT = 0;
+	public static float MINIMAP_BOUND_PADDING = 2f;
 
 }

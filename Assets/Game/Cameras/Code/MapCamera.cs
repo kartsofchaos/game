@@ -5,7 +5,8 @@ public class MapCamera : HUDBase, IMapLoader {
 
     // Transforms
     public Transform target;
-    private Transform cameraTransform;
+	private Transform cameraTransform;
+	private Transform minimapMaskTransform;
 
     // Camera
     private Camera mapCamera;
@@ -31,7 +32,9 @@ public class MapCamera : HUDBase, IMapLoader {
     private float minimapZoom;
     private Vector2 mapPosition;
     private Vector2 mapSize;
-    private float mapZoom;
+	private float mapZoom;
+	private Vector3 mapMaskScale;
+	private Vector3 minimapMaskScale;
 
     // Auto-loading feature
     private MapHandler mapHandler;
@@ -55,11 +58,14 @@ public class MapCamera : HUDBase, IMapLoader {
         mapSize.y = Screen.height * 0.8f;
         mapZoom = 106f;
 
-        // Setup minimap preferences
+		// Setup minimap preferences
+		minimapMaskTransform = GameObject.FindGameObjectWithTag(CameraConstants.TAG_MINIMAP_MASK).transform;
         minimapPosition.x = CameraConstants.POSITION_MINIMAP_X;
         minimapPosition.y = CameraConstants.POSITION_MINIMAP_Y;
         minimapSize.x = CameraConstants.SIZE_MINIMAP_WIDTH;
         minimapSize.y = CameraConstants.SIZE_MINIMAP_HEIGHT;
+		mapMaskScale = new Vector3(5f, 0f, 5f);
+		minimapMaskScale = new Vector3(1f, 0f, 1f);
         minimapZoom = 30f;
 
         // Setup map camera
@@ -212,6 +218,7 @@ public class MapCamera : HUDBase, IMapLoader {
                 deltaT += Time.deltaTime;
                 yield return true;
                 mapCamera.orthographicSize = Mathf.Lerp(mapCamera.orthographicSize, minimapZoom, deltaT / zoomDuration);
+				minimapMaskTransform.localScale = Vector3.Lerp(minimapMaskTransform.localScale, minimapMaskScale, deltaT / zoomDuration);
             }
         }
     }
@@ -222,7 +229,8 @@ public class MapCamera : HUDBase, IMapLoader {
         while (deltaT < zoomDuration) {
             deltaT += Time.deltaTime;
             yield return true;
-            mapCamera.orthographicSize = Mathf.Lerp(mapCamera.orthographicSize, mapZoom, deltaT / zoomDuration);
+			mapCamera.orthographicSize = Mathf.Lerp(mapCamera.orthographicSize, mapZoom, deltaT / zoomDuration);
+			minimapMaskTransform.localScale = Vector3.Lerp(minimapMaskTransform.localScale, mapMaskScale, deltaT / zoomDuration);
         }
     }
     

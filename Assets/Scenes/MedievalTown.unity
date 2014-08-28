@@ -239,6 +239,14 @@ Prefab:
       propertyPath: far clip plane
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 62af498a4543dc14e883bd1e03cbd4fc, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2000000, guid: 62af498a4543dc14e883bd1e03cbd4fc, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 62af498a4543dc14e883bd1e03cbd4fc, type: 2}
   m_RootGameObject: {fileID: 995429975}
@@ -630,7 +638,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &995429976
 Transform:
   m_ObjectHideFlags: 0

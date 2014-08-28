@@ -58,6 +58,7 @@ public class PlayerSpawner : MonoBehaviour
         mainCamera.GetComponent<SmoothFollowCustom>().SetTarget(newPlayerObject.GetComponentInChildren<CarHandling>().transform);
         GameObject mapCamera = GameObject.FindGameObjectWithTag(CameraConstants.TAG_MAP_CAMERA);
         mapCamera.GetComponent<MapCamera>().setTarget(newPlayerObject.GetComponentInChildren<CarHandling>().transform);
+        mapCamera.camera.enabled = true;
 
     }
 

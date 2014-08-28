@@ -9,8 +9,16 @@ public class MapDrawer : MonoBehaviour {
     public bool navigatable = false;
     public Texture2D nagivationTexture;
 
+    private GameObject cameraMapObject;
+    private Camera cameraMap;
+    private Transform targetTransform;
+
     // Use this for initialization
     void Start () {
+
+        cameraMapObject = GameObject.FindGameObjectWithTag(CameraConstants.TAG_MAP_CAMERA);
+        cameraMap = cameraMapObject.camera;
+        targetTransform = cameraMapObject.GetComponent<MapCamera>().target.transform;
 
         // Create a cylinder game object and assign it to the map layer
         textureObject = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
@@ -38,7 +46,23 @@ public class MapDrawer : MonoBehaviour {
     
     // Update is called once per frame
     void Update () {
-    
+        if (!navigatable)
+            return;
+
+        if (!targetTransform) {
+            Debug.LogWarning("Map camera has no target!");
+            return;
+        }
+        
+        if (Vector2.Distance(XZ(textureTransform.position), XZ(targetTransform.position)) > camera.orthographicSize)
+        {
+            Debug.Log("Out of view");
+        }
+    }
+
+    public Vector2 XZ(this Vector3 v)
+    {
+        return new Vector2(v.x, v.z);
     }
 
 }

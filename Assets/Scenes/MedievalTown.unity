@@ -191,7 +191,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400002, guid: 62af498a4543dc14e883bd1e03cbd4fc, type: 2}
   m_PrefabInternal: {fileID: 2071882538}
   m_GameObject: {fileID: 157013874}
-  m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106709}
+  m_LocalRotation: {x: -.707106888, y: 0, z: 0, w: .707106769}
   m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -266,6 +266,7 @@ GameObject:
   - 65: {fileID: 514271709}
   - 23: {fileID: 514271708}
   - 114: {fileID: 514271707}
+  - 54: {fileID: 514271712}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -338,6 +339,21 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!54 &514271712
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 514271706}
+  serializedVersion: 2
+  m_Mass: 100
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &656575133
 GameObject:
   m_ObjectHideFlags: 0
@@ -402,6 +418,7 @@ GameObject:
   - 65: {fileID: 782062802}
   - 23: {fileID: 782062801}
   - 114: {fileID: 782062800}
+  - 54: {fileID: 782062805}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -474,6 +491,21 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!54 &782062805
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 782062799}
+  serializedVersion: 2
+  m_Mass: 100
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &811911853
 GameObject:
   m_ObjectHideFlags: 0
@@ -486,6 +518,7 @@ GameObject:
   - 65: {fileID: 811911856}
   - 23: {fileID: 811911855}
   - 114: {fileID: 811911854}
+  - 54: {fileID: 811911859}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -558,6 +591,21 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!54 &811911859
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 811911853}
+  serializedVersion: 2
+  m_Mass: 100
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &929816128
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,7 +695,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 62af498a4543dc14e883bd1e03cbd4fc, type: 2}
   m_PrefabInternal: {fileID: 2071882538}
   m_GameObject: {fileID: 995429975}
-  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
+  m_LocalRotation: {x: .707106888, y: 0, z: 0, w: .707106769}
   m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1153,6 +1201,7 @@ GameObject:
   - 65: {fileID: 2056666536}
   - 23: {fileID: 2056666535}
   - 114: {fileID: 2056666534}
+  - 54: {fileID: 2056666539}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -1225,6 +1274,21 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!54 &2056666539
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2056666533}
+  serializedVersion: 2
+  m_Mass: 100
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &2071882538
 Prefab:
   m_ObjectHideFlags: 0

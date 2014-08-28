@@ -75,18 +75,17 @@ public class MapDrawer : MonoBehaviour {
 				_gameObject.renderer.material.SetTexture("_MainTex", navigationTexture);
 			lastSeenInsideViewRange = false;
 			Vector3 direction = heading / distance;
-			_transform.position = new Vector3(targetTransform.position.x - direction.x * (minimapViewRange - HUDConstants.MINIMAP_BOUND_PADDING), _transform.position.y, targetTransform.position.z - direction.z * (minimapViewRange - HUDConstants.MINIMAP_BOUND_PADDING));
+			_transform.position = new Vector3(targetTransform.position.x - direction.x * (minimapViewRange - HUDConstants.MINIMAP_BOUND_PADDING), 1f, targetTransform.position.z - direction.z * (minimapViewRange - HUDConstants.MINIMAP_BOUND_PADDING));
 			_transform.LookAt(_parentTransform);
-
 		}
 		// If still within view range, do not update texture
-		else if (!lastSeenInsideViewRange)
+		else
 		{
+            if (!lastSeenInsideViewRange)
+                _gameObject.renderer.material.SetTexture("_MainTex", mainTexture);
 			lastSeenInsideViewRange = true;
-			_gameObject.renderer.material.SetTexture("_MainTex", mainTexture);
-			_transform.localPosition = Vector3.up;
-			_transform.localEulerAngles = Vector3.zero;
-
+            _transform.position = new Vector3(_transform.position.x, 1f, _transform.position.z);
+			_transform.eulerAngles = Vector3.zero;
 		}
     }	
 }

@@ -88,30 +88,4 @@ public class HUDBase : MonoBehaviour
         }
 
     }
-
-    private HealthBar m_HealthBar;
-    public HealthBar HealthBar
-    {
-        get
-        {
-            if (m_HealthBar == null)
-            {
-                m_HealthBar = transform.root.GetComponentInChildren<HealthBar>();
-            }
-            return m_HealthBar;
-        }
-    }
-
-    private PlayerBar m_PlayerBar;
-    public PlayerBar PlayerBar
-    {
-        get
-        {
-            if (m_PlayerBar == null)
-            {
-                m_PlayerBar = transform.root.GetComponentInChildren<PlayerBar>();
-            }
-            return m_PlayerBar;
-        }
-    }
 }

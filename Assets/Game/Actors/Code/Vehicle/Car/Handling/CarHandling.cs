@@ -126,7 +126,7 @@ public class CarHandling : CarBase
     void FixedUpdate()
     {
         // If this is "our" car we apply our forces to it as per normal
-        if (PhotonView.isMine == true)
+        if (Player.IsLocalPlayer)
         {
 			UpdateLocalPhysics();
         }

@@ -137,6 +137,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1574526528}
   - {fileID: 1930597292}
   - {fileID: 1481750720}
   - {fileID: 995429976}
@@ -191,7 +192,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400002, guid: 62af498a4543dc14e883bd1e03cbd4fc, type: 2}
   m_PrefabInternal: {fileID: 2071882538}
   m_GameObject: {fileID: 157013874}
-  m_LocalRotation: {x: -.707106888, y: 0, z: 0, w: .707106769}
+  m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106709}
   m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -254,6 +255,36 @@ Transform:
   - {fileID: 34696536}
   - {fileID: 1535669229}
   m_Father: {fileID: 76312269}
+--- !u!1 &407325617
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 407325618}
+  m_Layer: 0
+  m_Name: Flags
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &407325618
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 407325617}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 514271711}
+  - {fileID: 782062804}
+  - {fileID: 811911858}
+  - {fileID: 2056666538}
+  m_Father: {fileID: 1574526528}
 --- !u!1 &514271706
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,7 +299,7 @@ GameObject:
   - 114: {fileID: 514271707}
   - 54: {fileID: 514271712}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: FlagRed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -338,7 +369,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 407325618}
 --- !u!54 &514271712
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -420,7 +451,7 @@ GameObject:
   - 114: {fileID: 782062800}
   - 54: {fileID: 782062805}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: FlagYellow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -490,7 +521,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: -25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 407325618}
 --- !u!54 &782062805
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -520,7 +551,7 @@ GameObject:
   - 114: {fileID: 811911854}
   - 54: {fileID: 811911859}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: FlagGreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -590,7 +621,7 @@ Transform:
   m_LocalPosition: {x: -25, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 407325618}
 --- !u!54 &811911859
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -695,7 +726,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 62af498a4543dc14e883bd1e03cbd4fc, type: 2}
   m_PrefabInternal: {fileID: 2071882538}
   m_GameObject: {fileID: 995429975}
-  m_LocalRotation: {x: .707106888, y: 0, z: 0, w: .707106769}
+  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
   m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -948,6 +979,33 @@ Transform:
   - {fileID: 1079478583}
   - {fileID: 137859395}
   m_Father: {fileID: 321630907}
+--- !u!1 &1574526527
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1574526528}
+  m_Layer: 0
+  m_Name: CaptureTheFlag
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1574526528
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1574526527}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 407325618}
+  m_Father: {fileID: 76312269}
 --- !u!1001 &1696913433
 Prefab:
   m_ObjectHideFlags: 0
@@ -1203,7 +1261,7 @@ GameObject:
   - 114: {fileID: 2056666534}
   - 54: {fileID: 2056666539}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: FlagBlue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1273,7 +1331,7 @@ Transform:
   m_LocalPosition: {x: 25, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 407325618}
 --- !u!54 &2056666539
 Rigidbody:
   m_ObjectHideFlags: 0

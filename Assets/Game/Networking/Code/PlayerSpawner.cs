@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 
@@ -50,12 +50,16 @@ public class PlayerSpawner : MonoBehaviour
  //       Player newPlayer = newPlayerObject.GetComponentInChildren<Player>();
 //        newPlayer.SetTeam( team );
 
-        // Find the MenuCamera and deactivate it
-		Camera.main.GetComponent<SmoothFollowCustom>().SetTarget( newPlayerObject.GetComponentInChildren<CarHandling>().transform );
+        MapDrawer mapDrawer = newPlayerObject.AddComponent<MapDrawer>();
+        mapDrawer.mainTexture = Resources.Load("Textures/Map/MapArrowWhite") as Texture2D;
 
-		// Instantiate a HUD for the player and place it in the local players hierharky
-		GameObject hud = Instantiate(Resources.Load("Prefabs/SportscarHUD")) as GameObject;
-		hud.transform.parent = newPlayerObject.transform;
+        // Init cameras
+        GameObject mainCamera = GameObject.FindGameObjectWithTag(CameraConstants.TAG_MAIN_CAMERA);
+        mainCamera.GetComponent<SmoothFollowCustom>().SetTarget(newPlayerObject.GetComponentInChildren<CarHandling>().transform);
+        GameObject mapCamera = GameObject.FindGameObjectWithTag(CameraConstants.TAG_MAP_CAMERA);
+        mapCamera.GetComponent<MapCamera>().setTarget(newPlayerObject.GetComponentInChildren<CarHandling>().transform);
+        mapCamera.camera.enabled = true;
+
     }
 
 }

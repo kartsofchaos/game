@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3a0cd1b3bcbcf384496abdcce10293b7
+guid: b36e90ef2197df549bc64d0243681b31
 ModelImporter:
   serializedVersion: 15
   fileIDToRecycleName:
@@ -7,7 +7,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: LargeClosedSack
+    4300000: Ladder
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -27,12 +27,12 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: .0149999997
+    globalScale: .00999999978
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
-    generateSecondaryUV: 1
+    generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 1
     weldVertices: 1

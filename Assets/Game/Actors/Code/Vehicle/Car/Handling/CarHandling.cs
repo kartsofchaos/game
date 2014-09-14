@@ -84,13 +84,6 @@ public class CarHandling : CarBase
     Vector3 relativeVelocity;                                                   // Holds the relative velocity of our car in all 3 axis
     private float wheelRadius               = 0;                                // Used to calculate the wheel speed in calculate RPM
 
-
-    // Network variables used to predict positions of cars over the network
-    Vector3 m_NetworkPosition;
-    Quaternion m_NetworkRotation;
-	Vector3 m_NetworkVelocity;
-	float m_NetworkAngularVelocity;
-
     double m_LastNetworkDataReceivedTime; 
 
 
@@ -126,17 +119,23 @@ public class CarHandling : CarBase
     void FixedUpdate()
     {
         // If this is "our" car we apply our forces to it as per normal
-        if (PhotonView.isMine == true)
+        if (PhotonNetwork.isMasterClient)
         {
 			UpdateLocalPhysics();
+            PhotonView.RPC(
+                "UpdateNetworkedPosition",
+                PhotonTargets.Others,
+                new object[] { MyTransform.position, MyRigidBody.velocity }
+            );
         }
-
+/*
         // Otherwise we try to predict where the car is depending on the information we recieved from the latest photon package
         else
         {
             UpdateNetworkedPosition();
             UpdateNetworkedRotation();
         }
+ * */
     }
 
 	// ------------------------------------------------------------------------------
@@ -194,7 +193,7 @@ public class CarHandling : CarBase
     // We only need to synchronize a few variables to recreate a good approximation of the cars position on each client
     public void SerializeState(PhotonStream stream, PhotonMessageInfo info)
     {
-        if (stream.isWriting == true)
+/*        if (stream.isWriting == true)
         {
             stream.SendNext(MyTransform.position);
             stream.SendNext(MyTransform.rotation);
@@ -209,14 +208,15 @@ public class CarHandling : CarBase
 			m_NetworkAngularVelocity = (float)stream.ReceiveNext();
 
             m_LastNetworkDataReceivedTime = info.timestamp;
-        }
+        }*/
     }
 
     // ------------------------------------------------------------------------------
     // Name	:	UpdateNetworkedPosition
     // Desc	:	Try to predict where the car is depending on the data recieved from Photon
     // ------------------------------------------------------------------------------
-    void UpdateNetworkedPosition()
+    [RPC]
+    void UpdateNetworkedPosition(Vector3 m_NetworkPosition, Vector3 m_NetworkVelocity)
     {
 		// Calculate the time it has passed since the information was up-to-date
 		float pingInSeconds = (float)PhotonNetwork.GetPing () * 0.001f;
@@ -261,7 +261,7 @@ public class CarHandling : CarBase
     // ------------------------------------------------------------------------------
     void UpdateNetworkedRotation()
     {
-		// Calculate the time it has passed since the information was up-to-date
+/*		// Calculate the time it has passed since the information was up-to-date
 		float pingInSeconds = (float)PhotonNetwork.GetPing () * 0.001f;
 		float timeSinceLastUpdate = (float)(PhotonNetwork.time - m_LastNetworkDataReceivedTime);
 		float totalTimePassed = pingInSeconds + timeSinceLastUpdate;
@@ -275,7 +275,7 @@ public class CarHandling : CarBase
 		else 
 		{
 			MyTransform.rotation = m_NetworkRotation;
-		}
+		}*/
     }
 
 
@@ -941,11 +941,11 @@ public class CarHandling : CarBase
 				GUILayout.Label ("Network Car");
 				GUILayout.Label ("LNDTime: " + m_LastNetworkDataReceivedTime);
 				GUILayout.Label ("------------------------");
-				GUILayout.Label ("Received information");
+	/*			GUILayout.Label ("Received information");
 				GUILayout.Label ("Position: " + m_NetworkPosition);
 				GUILayout.Label ("Rotation: " + m_NetworkRotation);
 				GUILayout.Label ("Velocity: " + m_NetworkVelocity);
-				GUILayout.Label ("Angular Velocity: " + m_NetworkAngularVelocity);
+				GUILayout.Label ("Angular Velocity: " + m_NetworkAngularVelocity);*/
 				GUILayout.Label ("------------------------");
 				GUILayout.Label ("Local information");
 				GUILayout.Label ("Position: " + MyTransform.position);

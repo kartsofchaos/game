@@ -446,7 +446,7 @@ GameObject:
   - 114: {fileID: 11400008}
   - 114: {fileID: 11400012}
   m_Layer: 0
-  m_Name: Chariot
+  m_Name: ClumsyKnight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -538,7 +538,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100014}
-  m_LocalRotation: {x: .0270493031, y: 0, z: -0, w: .999634087}
+  m_LocalRotation: {x: .0270493049, y: 0, z: -0, w: .999634147}
   m_LocalPosition: {x: .434096724, y: .576889873, z: -.22516273}
   m_LocalScale: {x: 1, y: .999999881, z: .999999881}
   m_Children: []
@@ -768,12 +768,12 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100052}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17.242012, y: .00119705102, z: -15.1314392}
+  m_LocalPosition: {x: -16.0085907, y: .00119705102, z: -26.8908844}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 400050}
   - {fileID: 400048}
   - {fileID: 400046}
+  - {fileID: 400050}
   m_Father: {fileID: 0}
 --- !u!23 &2300000
 Renderer:

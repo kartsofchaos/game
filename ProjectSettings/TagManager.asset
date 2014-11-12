@@ -10,7 +10,7 @@ TagManager:
   - Player
   - Self
   - MinimapMask
-  - MapCamera
+  - MinimapCamera
   - 
   - 
   - 
@@ -28,7 +28,7 @@ TagManager:
   - 
   - FxTemporaire
   - 
-  - 
+  - MapCamera
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

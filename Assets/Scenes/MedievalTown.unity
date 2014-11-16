@@ -175,6 +175,47 @@ Transform:
   - {fileID: 678243834}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!1 &79850940
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 79850941}
+  - 114: {fileID: 79850942}
+  m_Layer: 0
+  m_Name: Virus_Script
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &79850941
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 79850940}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 561.382812, y: 428.779297, z: 31.3125}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1930597292}
+  m_RootOrder: 1
+--- !u!114 &79850942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 79850940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dd88e722b998dc4f94fdaffdccbf0a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  burningPersons: []
+  TotalRoundTime: 300
 --- !u!1 &82598249
 GameObject:
   m_ObjectHideFlags: 0
@@ -968,6 +1009,7 @@ GameObject:
   - 224: {fileID: 500274071}
   - 222: {fileID: 500274073}
   - 114: {fileID: 500274072}
+  - 114: {fileID: 500274074}
   m_Layer: 5
   m_Name: RedTeamImage
   m_TagString: Untagged
@@ -1019,6 +1061,59 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 500274070}
+--- !u!114 &500274074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 500274070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delegates:
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 678243835}
+          m_MethodName: RedTeamButton
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
+              Culture=neutral, PublicKeyToken=null
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 79850940}
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 678243833}
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
+              Culture=neutral, PublicKeyToken=null
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!1 &560236525
 GameObject:
   m_ObjectHideFlags: 0
@@ -1724,7 +1819,6 @@ RectTransform:
   m_Children:
   - {fileID: 697593209}
   - {fileID: 128949668}
-  - {fileID: 1190249548}
   m_Father: {fileID: 1293203340}
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
@@ -2591,10 +2685,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 353a1a3c22a01ea45a15c41a2937bcc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TotalRoundTime: 300
-  redTeamScore: 0
-  blueTeamScore: 0
   totalFlags: 5
+  TotalRoundTime: 300
 --- !u!4 &1190249548
 Transform:
   m_ObjectHideFlags: 0
@@ -2602,11 +2694,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1190249546}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 139.060364, y: 117.617554, z: 14.3102112}
+  m_LocalPosition: {x: 561.382812, y: 428.779297, z: 31.3125}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 818338545}
-  m_RootOrder: 2
+  m_Father: {fileID: 1930597292}
+  m_RootOrder: 0
 --- !u!1 &1221989647
 GameObject:
   m_ObjectHideFlags: 0
@@ -3568,7 +3660,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delegates:
-  - eventID: 0
+  - eventID: 4
     callback:
       m_PersistentCalls:
         m_Calls:
@@ -3579,10 +3671,22 @@ MonoBehaviour:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
               Culture=neutral, PublicKeyToken=null
-            m_IntArgument: 1
+            m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 79850940}
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
+              Culture=neutral, PublicKeyToken=null
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
           m_CallState: 2
         - m_Target: {fileID: 678243833}
           m_MethodName: SetActive
@@ -4065,7 +4169,9 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 29.9775391, y: -139.661728, z: -17.0022888}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1190249548}
+  - {fileID: 79850941}
   m_Father: {fileID: 76312269}
   m_RootOrder: 1
 --- !u!114 &1930597293

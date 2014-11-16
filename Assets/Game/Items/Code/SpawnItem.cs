@@ -27,7 +27,6 @@ public class SpawnItem : MonoBehaviour {
          items[index] = o;
     }
 
-	// Use this for initialization
 	void Start () {
         if (PhotonNetwork.isMasterClient)
         {
@@ -45,7 +44,7 @@ public class SpawnItem : MonoBehaviour {
 
 	}
 	
-	// Update is called once per frame
+	// Requires the tag in the GUI to work. 
 	void Update () {
         time -= Time.deltaTime;
         Debug.Log(time);

@@ -1,29 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PickupFlag : Photon.MonoBehaviour {
-
+public class PickupFlag : Photon.MonoBehaviour 
+{
     private Transform personWithFlag;
     public bool isFlagStolen = false;
     private string currentFlagTag;
     private Vector3 homePosition;
     private Vector3 blueTeam;
     private Vector3 redTeam;
-
+    private Player p;
 
     void Start()
     {
         if ( PhotonNetwork.isMasterClient )
         {
             homePosition = transform.position;
-            blueTeam = GameObject.Find("BlueFlag").transform.position;
-            redTeam = GameObject.Find("RedFlag").transform.position;
-
+            blueTeam = GameObject.Find("BlueGround").transform.position;
+            redTeam = GameObject.Find("RedGround").transform.position;
         }
     }
 
     // Get opposite team
-    Vector3 getOtherTeam()
+    Vector3 GetOtherTeam()
     {
         if (currentFlagTag == "Blue")
         {
@@ -44,7 +43,8 @@ public class PickupFlag : Photon.MonoBehaviour {
 
     
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+    {
         HandleFlag();
 
         if (isFlagStolen)
@@ -56,8 +56,7 @@ public class PickupFlag : Photon.MonoBehaviour {
     void HandleFlag()
     {
         //Debug.Log(Vector3.Distance(transform.position, getOtherTeam()));
-
-        if ( isFlagStolen && Vector3.Distance(transform.position, getOtherTeam()) < 2f)
+        if ( isFlagStolen && Vector3.Distance(transform.position, GetOtherTeam()) < 2f)
         {
             transform.position = homePosition;
             isFlagStolen = false;
@@ -75,7 +74,6 @@ public class PickupFlag : Photon.MonoBehaviour {
             currentFlagTag = transform.tag;
             personWithFlag = c.transform.root.GetChild(0);
             isFlagStolen = true;
-
             //Debug.Log(currentFlagTag);
         }
     }

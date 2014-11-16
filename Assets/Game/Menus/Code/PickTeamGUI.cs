@@ -57,17 +57,17 @@ public class PickTeamGUI : MonoBehaviour
 
     string GetButtonLabel(Team team)
     {
-    //    GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
+        //    GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
         int playerCount = 0;
-/*
-        for (int i = 0; i < shipObjects.Length; ++i)
-        {
-            if (shipObjects[i].GetComponent<Ship>() != null && shipObjects[i].GetComponent<Player>().Team == team)
-            {
-                playerCount++;
-            }
-        }
-*/
+        /*
+                for (int i = 0; i < shipObjects.Length; ++i)
+                {
+                    if (shipObjects[i].GetComponent<Ship>() != null && shipObjects[i].GetComponent<Player>().Team == team)
+                    {
+                        playerCount++;
+                    }
+                }
+        */
         string label = team.ToString() + " Team\n";
         label += playerCount.ToString();
 

@@ -15,8 +15,8 @@ public class PickupItem : MonoBehaviour {
 
     void OnTriggerEnter(Collider c)
     {
-        Debug.Log(c.transform.tag);
-        Debug.Log(this.tag);
+        //Debug.Log(c.transform.tag);
+        //Debug.Log(this.tag);
         Destroy(gameObject);
     }
 }

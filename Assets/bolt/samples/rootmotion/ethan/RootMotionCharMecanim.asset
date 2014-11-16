@@ -1,0 +1,110 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1601357315, guid: a6c37f8d9bde2ac45bf14bc232ed017c, type: 3}
+  m_Name: RootMotionCharMecanim
+  m_EditorClassIdentifier: 
+  compile: 0
+  controller: {fileID: 9100000, guid: 1db68d53accfc2c4893b2b3e5707d6e7, type: 2}
+  properties:
+  - name: Speed
+    enabled: 1
+    foldout: 1
+    syncMode: 0
+    syncTarget: 1
+    type: 5
+    options: 0
+    intSettings:
+      byteBits: 8
+      shortBits: 16
+      intBits: 32
+      longBits: 64
+    floatSettings:
+      interpolate: 0
+      compression: 0
+    vectorSettings:
+      interpolate: 0
+      compression: 0
+      axes: 15
+    quaternionSettings:
+      interpolate: 0
+      compression: 0
+      axes: 7
+    stringSettings:
+      maxLength: -1
+      encoding: 1
+    mecanimSettings:
+      mecanimAsset: {fileID: 0}
+    transformSettings:
+      mode: 1
+      maxForwardExtrapolation: 2
+      maxInterpTime: 1
+      posAxes: 7
+      posCompression: 0
+      rotAxes: 7
+      rotCompression: 0
+      velZeroTolerance: .00999999978
+      velMode: 0
+      velCompression: 0
+      velAxes: 7
+      accZeroTolerance: .00999999978
+      accMode: 2
+      accCompression: 0
+    assetSettingsMecanim:
+      interpolationTime: .25
+    assetSettingsCommand:
+      synchronize: 1
+  - name: Sneaking
+    enabled: 1
+    foldout: 1
+    syncMode: 0
+    syncTarget: 1
+    type: 0
+    options: 0
+    intSettings:
+      byteBits: 8
+      shortBits: 16
+      intBits: 32
+      longBits: 64
+    floatSettings:
+      interpolate: 0
+      compression: 0
+    vectorSettings:
+      interpolate: 0
+      compression: 0
+      axes: 15
+    quaternionSettings:
+      interpolate: 0
+      compression: 0
+      axes: 7
+    stringSettings:
+      maxLength: -1
+      encoding: 1
+    mecanimSettings:
+      mecanimAsset: {fileID: 0}
+    transformSettings:
+      mode: 1
+      maxForwardExtrapolation: 2
+      maxInterpTime: 1
+      posAxes: 7
+      posCompression: 0
+      rotAxes: 7
+      rotCompression: 0
+      velZeroTolerance: .00999999978
+      velMode: 0
+      velCompression: 0
+      velAxes: 7
+      accZeroTolerance: .00999999978
+      accMode: 2
+      accCompression: 0
+    assetSettingsMecanim:
+      interpolationTime: 0
+    assetSettingsCommand:
+      synchronize: 1

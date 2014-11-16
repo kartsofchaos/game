@@ -54,7 +54,7 @@ public class CarVisuals : CarBase
             {
                 // Rotate front wheels around their y axis. For some reason our wheels are rotated 270 degrees from the start
                 Vector3 ea = w.wheelGraphic.parent.localEulerAngles;
-                ea.y = 270 + steering * CarHandling.maximumTurn;
+                ea.y = steering * CarHandling.maximumTurn;
                 w.wheelGraphic.parent.localEulerAngles = ea;
             }
 

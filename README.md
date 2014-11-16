@@ -28,50 +28,54 @@ Contents of `Assets` folder:
 - `Game`
   - `Actors`
     - `Code`
-    - `Models`
-    - `Prefabs`
-    - `Sounds`
-    - `Textures`
+    - `Resources`
+      - `Models`
+      - `Prefabs`
+      - `Sounds`
+      - `Textures`
   - `Environment`
     - `Code`
-    - `Models`
-    - `Prefabs`
-    - `Sounds`
-    - `Textures`
+    - `Resources`
+      - `Models`
+      - `Prefabs`
+      - `Sounds`
+      - `Textures`
   - `GameModes`
     - `Code`
-    - `Models`
-    - `Prefabs`
-    - `Sounds`
-    - `Textures`
+    - `Resources`
+      - `Models`
+      - `Prefabs`
+      - `Sounds`
+      - `Textures`
   - `HUD`
     - `Code`
-    - `Prefabs`
-    - `Textures`
+    - `Resources`
+      - `Prefabs`
+      - `Textures`
   - `Items`
     - `Code`
-    - `Models`
-    - `Prefabs`
-    - `Sounds`
-    - `Textures`
+    - `Resources`
+      - `Models`
+      - `Prefabs`
+      - `Sounds`
+      - `Textures`
   - `Menus`
     - `Code`
-    - `Skins`
-    - `Sounds`
-    - `Textures`
+    - `Resources`
+      - `Skins`
+      - `Sounds`
+      - `Textures`
   - `Networking`
     - `Code`
+    - `Resources`
   - `Skills`
     - `Code`
-    - `Models`
-    - `Prefabs`
-    - `Sounds`
-    - `Textures`
+    - `Resources`
+      - `Models`
+      - `Prefabs`
+      - `Sounds`
+      - `Textures`
 - `Plugins`
-- `Resources`
-  - `Actors`
-  - `HUD`
-  - `Skills`
 - `Scenes`
 - `Standard Assets`
 

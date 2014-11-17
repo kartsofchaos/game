@@ -16,8 +16,8 @@ PlayerSettings:
   cursorHotspot: {x: 0, y: 0}
   defaultScreenWidth: 1024
   defaultScreenHeight: 768
-  defaultScreenWidthWeb: 1080
-  defaultScreenHeightWeb: 720
+  defaultScreenWidthWeb: 1920
+  defaultScreenHeightWeb: 1080
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
   m_ActiveColorSpace: 0
@@ -74,8 +74,6 @@ PlayerSettings:
     16:9: 1
     Others: 1
   iPhoneBundleIdentifier: com.Company.ProductName
-  metroEnableIndependentInputSource: 0
-  metroEnableLowLatencyPresentationAPI: 0
   productGUID: 26180b209ffb8274c8cf3148c838ebca
   iPhoneBundleVersion: 1.0
   AndroidBundleVersionCode: 1
@@ -174,7 +172,6 @@ PlayerSettings:
   metroSplashScreenBackgroundColor: {r: 0, g: 0, b: 0, a: 1}
   metroSplashScreenUseBackgroundColor: 0
   metroCapabilities: {}
-  metroUnprocessedPlugins: []
   metroCompilationOverrides: 1
   blackberryDeviceAddress: 
   blackberryDevicePassword: 

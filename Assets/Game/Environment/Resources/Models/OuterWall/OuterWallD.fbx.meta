@@ -31,8 +31,8 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
-    swapUVChannels: 0
-    generateSecondaryUV: 1
+    swapUVChannels: 1
+    generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 1
     weldVertices: 1

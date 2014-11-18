@@ -13,12 +13,9 @@ public class PickupFlag : Photon.MonoBehaviour
 
     void Start()
     {
-        if ( PhotonNetwork.isMasterClient )
-        {
-            homePosition = transform.position;
-            blueTeam = GameObject.Find("BlueGround").transform.position;
-            redTeam = GameObject.Find("RedGround").transform.position;
-        }
+       homePosition = transform.position;
+       blueTeam = GameObject.Find("BlueGround").transform.position;
+       redTeam = GameObject.Find("RedGround").transform.position;       
     }
 
     // Get opposite team
@@ -34,10 +31,8 @@ public class PickupFlag : Photon.MonoBehaviour
     bool isNotEqualTeam(Team team)
     {
         Team t = Team.None;
-
         if ( transform.tag == "Blue" ) t = Team.Blue;
         if( transform.tag == "Red" ) t = Team.Red;
-
         return t != team;
     }
 
@@ -46,7 +41,6 @@ public class PickupFlag : Photon.MonoBehaviour
 	void Update () 
     {
         HandleFlag();
-
         if (isFlagStolen)
         {
             transform.position = personWithFlag.position;
@@ -69,7 +63,7 @@ public class PickupFlag : Photon.MonoBehaviour
         //Debug.Log("Player in team: " + p.Team);
         //Debug.Log("Tranform tag: " + transform.tag);
 
-        if ( isNotEqualTeam(p.Team) )
+        if (isNotEqualTeam(p.Team))
         {            
             currentFlagTag = transform.tag;
             personWithFlag = c.transform.root.GetChild(0);

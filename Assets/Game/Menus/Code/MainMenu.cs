@@ -23,7 +23,7 @@ public class MainMenu : MonoBehaviour
     private GameObject playerPropertiesGO;
     private PlayerProperties playerProperties;
 
-    void Start()
+	void Start ()
     {
         CreatePlayerProperties();
     }
@@ -38,14 +38,14 @@ public class MainMenu : MonoBehaviour
         playerProperties = playerPropertiesGO.AddComponent<PlayerProperties>();
     }
 
-    private void Connect()
+	private void Connect ()
     {
         // If we are not connected, connect to Photon via our MultiplayerConnector
         if (PhotonNetwork.connectionState == ConnectionState.Disconnected)
         {
             MultiplayerConnector.Instance.Connect();
         }
-    }
+	}
 
     /// <summary>
     /// Sets up the text style for the menu

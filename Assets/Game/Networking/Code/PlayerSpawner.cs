@@ -25,7 +25,7 @@ public class PlayerSpawner : MonoBehaviour
         // In this case go back to the main menu.
         if (PhotonNetwork.connected == false)
         {
-            Application.LoadLevel("MainMenu");
+            Application.LoadLevel("MainMenuVictor");
             return;
         }
 	}
@@ -34,7 +34,6 @@ public class PlayerSpawner : MonoBehaviour
     {
         // Notice the difference from PhotonNetwork.Instantiate to Unitys GameObject.Instantiate
         GameObject newPlayerObject = PhotonNetwork.Instantiate("Prefabs/ClumsyKnight", new Vector3(25f, 1f, -15f), Quaternion.identity, 0, new object[] { (int)team });
-
 
         // Spawn at the right place
         if (team == Team.Red)
@@ -48,9 +47,8 @@ public class PlayerSpawner : MonoBehaviour
             newPlayerObject.transform.rotation = BlueSpawns[0].rotation;
         }
 
-        // Set play to current Team
-        Player newPlayer = newPlayerObject.GetComponentInChildren<Player>();
-        newPlayer.SetTeam( team );
+ //       Player newPlayer = newPlayerObject.GetComponentInChildren<Player>();
+//        newPlayer.SetTeam( team );
 
         MapDrawer mapDrawer = newPlayerObject.AddComponent<MapDrawer>();
         mapDrawer.mainTexture = Resources.Load("Textures/Map/MapArrowWhite") as Texture2D;

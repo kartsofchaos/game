@@ -6,7 +6,8 @@ public class GamemodeCaptureTheFlag : MonoBehaviour
     private GameObject master, flag, red, blue;
     public int totalFlags = 5;
     public float TotalRoundTime;
-
+    public Transform blueFlag;
+    public Transform redFlag; 
     // Create primitive type for base ground and then add flag prefabs
 
     void Start()
@@ -27,6 +28,7 @@ public class GamemodeCaptureTheFlag : MonoBehaviour
             blue.transform.localScale = new Vector3(1, 0.001f, 1);
             blue.collider.isTrigger = true;
             blue.transform.parent = master.transform;
+            blue.AddComponent<PickupFlag>();
 
             red = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
             red.transform.name = "RedGround";
@@ -35,13 +37,16 @@ public class GamemodeCaptureTheFlag : MonoBehaviour
             red.collider.isTrigger = true;
             red.transform.parent = master.transform;
 
-            flag = PhotonNetwork.InstantiateSceneObject("Prefabs/AntlerFlag", new Vector3(30, 0f, 0f), Quaternion.identity, 0, null);
+            flag = Instantiate(Resources.Load("Prefabs/Flags/BlueFlagNormal", typeof(GameObject))) as GameObject;
+            flag.transform.position = red.transform.position;
             flag.transform.tag = "Blue";
             flag.transform.parent = blue.transform;
 
-            flag = PhotonNetwork.InstantiateSceneObject("Prefabs/EagleFlag", new Vector3(-30, 0f, 0f), Quaternion.identity, 0, null);
+            flag = Instantiate(Resources.Load("Prefabs/Flags/RedFlagNormal", typeof(GameObject))) as GameObject;
+            flag.transform.position = blue.transform.position;
             flag.transform.tag = "Red";
             flag.transform.parent = red.transform;
+            flag.AddComponent<PickupFlag>();
         }
     }
 

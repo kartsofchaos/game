@@ -69,7 +69,7 @@ public class Player : PlayerBase
     // Read our name from the playerproperties and destroy it
     private void readProperties()
     {
-       /*
+        /*
         GameObject go = GameObject.Find("PlayerProperties");
         _name = go.GetComponent<PlayerProperties>().Name;
         Destroy(go); */

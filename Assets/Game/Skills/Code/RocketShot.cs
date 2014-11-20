@@ -24,6 +24,10 @@ public class RocketShot : AimSkill
 
     void Update()
     {
+        //RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Debug.Log("Mouse position: " + ray);
+
 
         if (Input.GetButton(SkillConstants.KEY_SKILL_TWO) && Time.time > nextFire) 
         {

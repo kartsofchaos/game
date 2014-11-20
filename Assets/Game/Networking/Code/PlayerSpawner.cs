@@ -25,7 +25,7 @@ public class PlayerSpawner : MonoBehaviour
         // In this case go back to the main menu.
         if (PhotonNetwork.connected == false)
         {
-            Application.LoadLevel("MainMenuVictor");
+            Application.LoadLevel("MainMenu");
             return;
         }
 	}

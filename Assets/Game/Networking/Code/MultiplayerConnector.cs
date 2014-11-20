@@ -67,7 +67,7 @@ public class MultiplayerConnector : MonoBehaviour
 
         Debug.Log("OnJoinedLobby");
 
-        if (Application.loadedLevelName == "MainMenuVictor")
+        if (Application.loadedLevelName == "MainMenu")
         {
             RoomOptions roomOptions = new RoomOptions();
             roomOptions.maxPlayers = 20;
@@ -105,7 +105,7 @@ public class MultiplayerConnector : MonoBehaviour
         //Pause the message queue. While unity is loading a new level, updates from Photon are skipped.
         //So we have to tell Photon to wait until we resume the queue again after the level is loaded. See MultiplayerConnector.OnLevelWasLoaded
         PhotonNetwork.isMessageQueueRunning = false;
-        Application.LoadLevel("MedievalTownVictor");
+        Application.LoadLevel("MedievalTown");
     }
 
     // <summary>
@@ -141,9 +141,9 @@ public class MultiplayerConnector : MonoBehaviour
 
     void OnDisconnectedFromPhoton()
     {
-        if (Application.loadedLevelName != "MainMenuVictor")
+        if (Application.loadedLevelName != "MainMenu")
         {
-            Application.LoadLevel("MainMenuVictor");
+            Application.LoadLevel("MainMenu");
         }
     }
 

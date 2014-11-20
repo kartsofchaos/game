@@ -86,7 +86,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SecondsUntilDestroy: 5
-  speed: 15
+  speed: 35
   car: {fileID: 400252, guid: 08e113da50f6c12429bdaa0e26284683, type: 2}
 --- !u!136 &13600000
 CapsuleCollider:

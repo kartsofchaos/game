@@ -16,7 +16,8 @@ public class BulletLifeTime : MonoBehaviour {
 
     void OnTriggerEnter(Collider otherObject)
     {
-        Destroy(this.gameObject);
+        if(otherObject.tag != "Player")
+            Destroy(this.gameObject);
         // From who is the bullet shot 
         // what object is hit 
         // if other player is hit then decrease player health or shield

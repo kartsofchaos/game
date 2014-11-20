@@ -2,8 +2,10 @@
 
 public class RocketShot : AimSkill
 {
-	public float shootingSpeed = 30;
 	public GameObject rocketPrefab;
+    public Transform rocketSpawn;
+    public float fireRate;
+    private float nextFire;
 	
 	protected override void _aim ()
 	{
@@ -19,4 +21,14 @@ public class RocketShot : AimSkill
 	{
 
 	}
+
+    void Update()
+    {
+
+        if (Input.GetButton(SkillConstants.KEY_SKILL_TWO) && Time.time > nextFire) 
+        {
+            nextFire = Time.time + fireRate;
+            Instantiate(rocketPrefab, rocketSpawn.position, rocketSpawn.rotation);
+        }
+    }
 }

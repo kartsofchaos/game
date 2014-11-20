@@ -33,7 +33,7 @@ public class PlayerSpawner : MonoBehaviour
     public void CreateLocalPlayer(Team team)
     {
         // Notice the difference from PhotonNetwork.Instantiate to Unitys GameObject.Instantiate
-        GameObject newPlayerObject = PhotonNetwork.Instantiate("Prefabs/ClumsyKnight", new Vector3(25f, 1f, -15f), Quaternion.identity, 0, new object[] { (int)team });
+        GameObject newPlayerObject = PhotonNetwork.Instantiate("Prefabs/ClumsyKnightBullet", new Vector3(25f, 1f, -15f), Quaternion.identity, 0, new object[] { (int)team });
 
         // Spawn at the right place
         if (team == Team.Red)

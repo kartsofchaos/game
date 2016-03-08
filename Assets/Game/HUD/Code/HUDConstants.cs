@@ -3,25 +3,21 @@ using System.Collections;
 
 public class HUDConstants {
 
-    // Keys
-    public static string KEY_MAP = "Map";
+	// Tags
+	public static string KEY_MAP = "Map";
+	public static string TAG_MINIMAP_CAMERA = "MinimapCamera";
+	public static string TAG_MINIMAP_MASK = "MinimapMask";
 
-    // Layers
-    public static string LAYER_MAP = "Map";
+	public static string PATH_HUD = Constants.PATH_GAME + "/HUD";
 
-    // Paths
-    public static string PATH_HUD = Constants.PATH_GAME + "/HUD";
-    public static string PATH_MAP_BUNDLE = "Data/mapData.dat";
-    public static string PATH_MAP_SETTINGS = PATH_HUD + "/Code/Map/MapSettings.txt";
-    public static string PATH_MAP_MATERIALS = PATH_HUD + "/Resources/Materials/Map";
-	public static string PATH_MAP_MODELS = PATH_HUD + "/Resources/Models/Map";
-	public static string PATH_MAP_PREFABS = PATH_HUD + "/Resources/Prefabs/Map";
-	public static string PATH_MAP_TEXTURES = PATH_HUD + "/Resources/Textures/Map";
+	// Paths
+	public static string PATH_MINIMAP_SETTINGS = PATH_HUD + "/Code/Minimap/MinimapSettings.txt";
+	public static string PATH_MINIMAP_MATERIALS = PATH_HUD + "/Materials/Minimap";
+	public static string PATH_MINIMAP_MODELS = PATH_HUD + "/Models/Minimap";
+	public static string PATH_MINIMAP_PREFABS = PATH_HUD + "/Prefabs/Minimap";
+	public static string PATH_MINIMAP_TEXTURES = PATH_HUD + "/Textures/Minimap";
 
-    // Map
-    public static string MAP_SEGMENT_NAME = "MapSegment.mesh";
-    public static string MAP_SEGMENT_PATTERN = "{0}-{1}.{2}";
-    public static float MAP_HEIGHT = 0;
-	public static float MINIMAP_BOUND_PADDING = 2f;
+	// Minimap
+	public static string MINIMAP_SEGMENT_PATTERN = "{0}-{1}.{2}";
 
 }

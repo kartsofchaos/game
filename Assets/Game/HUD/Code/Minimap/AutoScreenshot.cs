@@ -27,7 +27,7 @@ public class AutoScreenshot : MonoBehaviour {
 		var cameras = Camera.allCameras;
 		for (int i = 0; i < cameras.Length; i++) {
 			if(cameras[i].enabled) {
-				camera.enabled = false;
+				GetComponent<Camera>().enabled = false;
 				//Debug.LogError("Disable all other cameras before running AutoSnapshot");
 				//yield break;
 			}
@@ -39,11 +39,11 @@ public class AutoScreenshot : MonoBehaviour {
 		EditorHelper.CreateAssetFolderIfNotExists("Game/HUD/Textures/Minimap");
 		
 		// Setup minimap camera
-		camera.enabled = true;
-		camera.aspect = Aspect;
+		GetComponent<Camera>().enabled = true;
+		GetComponent<Camera>().aspect = Aspect;
 
-		var xHalfUnit = camera.orthographicSize * Aspect;
-		var zHalfUnit = camera.orthographicSize;
+		var xHalfUnit = GetComponent<Camera>().orthographicSize * Aspect;
+		var zHalfUnit = GetComponent<Camera>().orthographicSize;
 
 		xInc = xHalfUnit * 2;
 		zInc = zHalfUnit * 2;
@@ -75,7 +75,7 @@ public class AutoScreenshot : MonoBehaviour {
 		}
 
 		// Disable camera
-		camera.enabled = false;
+		GetComponent<Camera>().enabled = false;
 	}
 	// Gets the "upper" corner-coordinate of the closets segment
 	private Vector2 GetSegmentCoorsForPosition(float x, float z)
@@ -109,7 +109,7 @@ public class AutoScreenshot : MonoBehaviour {
 
 	// Move camera to (x, z)
 	private void moveCamera(float x, float z) {
-		this.transform.position = new Vector3(RoundToNearestPixel(x, camera), this.transform.position.y, RoundToNearestPixel(z, camera));
+		this.transform.position = new Vector3(RoundToNearestPixel(x, GetComponent<Camera>()), this.transform.position.y, RoundToNearestPixel(z, GetComponent<Camera>()));
 	}
 	
 	// Round a position to not overlap in pixels (TODO: Not working)

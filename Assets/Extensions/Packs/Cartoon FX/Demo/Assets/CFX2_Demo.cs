@@ -23,7 +23,7 @@ public class CFX2_Demo : MonoBehaviour
 	void OnMouseDown()
 	{
 		RaycastHit hit = new RaycastHit();
-		if(this.collider.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 9999f))
+		if(this.GetComponent<Collider>().Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 9999f))
 		{
 			GameObject particle = spawnParticle();
 			particle.transform.position = hit.point + particle.transform.position;
@@ -78,9 +78,9 @@ public class CFX2_Demo : MonoBehaviour
 		randomSpawnsDelay = GUILayout.TextField(randomSpawnsDelay, 10, GUILayout.Width(42));
 		randomSpawnsDelay = Regex.Replace(randomSpawnsDelay, @"[^0-9.]", "");
 		
-		if(GUILayout.Button(this.renderer.enabled ? "Hide Ground" : "Show Ground", GUILayout.Width(90)))
+		if(GUILayout.Button(this.GetComponent<Renderer>().enabled ? "Hide Ground" : "Show Ground", GUILayout.Width(90)))
 		{
-			this.renderer.enabled = !this.renderer.enabled;
+			this.GetComponent<Renderer>().enabled = !this.GetComponent<Renderer>().enabled;
 		}
 		
 		if(GUILayout.Button(slowMo ? "Normal Speed" : "Slow Motion", GUILayout.Width(100)))
@@ -131,9 +131,9 @@ public class CFX2_Demo : MonoBehaviour
 		if(exampleIndex < 0) exampleIndex = ParticleExamples.Length - 1;
 		
 		if(ParticleExamples[exampleIndex].name.Contains("Splash") || ParticleExamples[exampleIndex].name.Contains("Skim"))
-			this.renderer.material = waterMat;
+			this.GetComponent<Renderer>().material = waterMat;
 		else
-			this.renderer.material = groundMat;
+			this.GetComponent<Renderer>().material = groundMat;
 	}
 	private void nextParticle()
 	{
@@ -141,8 +141,8 @@ public class CFX2_Demo : MonoBehaviour
 		if(exampleIndex >= ParticleExamples.Length) exampleIndex = 0;
 		
 		if(ParticleExamples[exampleIndex].name.Contains("Splash") || ParticleExamples[exampleIndex].name.Contains("Skim"))
-			this.renderer.material = waterMat;
+			this.GetComponent<Renderer>().material = waterMat;
 		else
-			this.renderer.material = groundMat;
+			this.GetComponent<Renderer>().material = groundMat;
 	}
 }

@@ -240,7 +240,8 @@ public class MapHandler
 	}
 
 	AssetBundleRequest LoadSegmentAsyncAt(int x, int z) {
-		return this.bundle.LoadAsync(string.Format(HUDConstants.MINIMAP_SEGMENT_PATTERN, x, z, mapSettings.segmentName), typeof(GameObject));
+		return this.bundle.LoadAssetAsync(string.Format(HUDConstants.MINIMAP_SEGMENT_PATTERN, x, z, mapSettings.segmentName), 
+			typeof(GameObject));
 	}
 
 	GameObject LoadAndCreateSegmentAt(float x, float z) {
@@ -260,7 +261,8 @@ public class MapHandler
 	}
 
 	GameObject LoadSegmentAt (int x, int z) {
-		return bundle.Load(string.Format(HUDConstants.MINIMAP_SEGMENT_PATTERN, x, z, mapSettings.segmentName), typeof(GameObject)) as GameObject;
+		return bundle.LoadAsset(string.Format(HUDConstants.MINIMAP_SEGMENT_PATTERN, x, z, mapSettings.segmentName), 
+			typeof(GameObject)) as GameObject;
 	}
 
 }

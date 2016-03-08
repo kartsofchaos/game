@@ -41,7 +41,7 @@ public class MapLoader : HUDBase, IMapLoader {
 		toggling = false;
 
 		// Setup map camera
-		mapCamera = gameObject.camera;
+		mapCamera = gameObject.GetComponent<Camera>();
 		mapCamera.clearFlags = CameraClearFlags.Depth;
 		mapMask = GameObject.FindGameObjectWithTag (HUDConstants.TAG_MINIMAP_MASK);
 		mapMask.gameObject.SetActive(true);
@@ -63,7 +63,7 @@ public class MapLoader : HUDBase, IMapLoader {
 		// Get player
 		player = CarHandling.transform;
 
-		var bundle = AssetBundle.CreateFromFile(string.Format("{0}/{1}", System.IO.Directory.GetCurrentDirectory(), "Data/mapData.dat"));
+		var bundle = AssetBundle.LoadFromFile(string.Format("{0}/{1}", System.IO.Directory.GetCurrentDirectory(), "Data/mapData.dat"));
 		if (bundle == null) {
 			Debug.Log("Settings data not found!");
 			return;

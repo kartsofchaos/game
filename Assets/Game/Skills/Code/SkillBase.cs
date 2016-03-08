@@ -81,7 +81,7 @@ public class SkillBase : MonoBehaviour
         {
             if (m_CarRigidBody == null)
             {
-                m_CarRigidBody = CarHandling.rigidbody;
+                m_CarRigidBody = CarHandling.GetComponent<Rigidbody>();
             }
             return m_CarRigidBody;
         }

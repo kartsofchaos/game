@@ -41,7 +41,7 @@ public class Utils : MonoBehaviour {
 					var prefab = PrefabUtility.CreatePrefab(string.Format("Assets/Game/HUD/Prefabs/Minimap/{0}.prefab", texture.name), CreatePrefab(mesh, texture.name));
 
 					// Set prefab properties
-					prefab.renderer.sharedMaterial = mat;
+					prefab.GetComponent<Renderer>().sharedMaterial = mat;
 					prefab.GetComponent<MeshFilter>().sharedMesh = mesh;
 					prefab.GetComponent<MeshRenderer>().castShadows = false;
 					prefab.GetComponent<MeshRenderer>().receiveShadows = false;
@@ -57,8 +57,8 @@ public class Utils : MonoBehaviour {
 	private static GameObject CreatePrefab(Mesh mesh, string name)
 	{
 		var gameObject = new GameObject(name);
-		gameObject.AddComponent("MeshFilter");
-		gameObject.AddComponent("MeshRenderer");
+		gameObject.AddComponent<MeshFilter>();
+		gameObject.AddComponent<MeshRenderer>();
 		gameObject.transform.Rotate(new Vector3(1, 0, 0), 90);
 		return gameObject;
 	}

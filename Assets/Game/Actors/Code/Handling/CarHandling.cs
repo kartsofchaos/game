@@ -102,7 +102,7 @@ public class CarHandling : CarBase
     void Awake()
     {
         // Cache Components
-        MyRigidBody = rigidbody;										       // Cache rigidbody component
+        MyRigidBody = GetComponent<Rigidbody>();										       // Cache rigidbody component
         MyTransform = transform;										       // Cache transform component
         wheelRadius = 0;
     }
@@ -686,7 +686,7 @@ public class CarHandling : CarBase
 
         // The true game object should be in a child object first transform
         wheel.wheelGraphic = wheelTransform;
-        wheel.collider.radius = wheel.wheelGraphic.renderer.bounds.size.y / 2;
+        wheel.collider.radius = wheel.wheelGraphic.GetComponent<Renderer>().bounds.size.y / 2;
         wheelRadius = wheel.collider.radius;
 
         // If its a front wheel then insert a steer column parent so we can YAW it and let it

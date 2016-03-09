@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// This script wraps photons connect functionality and defines several of the callbacks Photon invokes
@@ -67,7 +67,7 @@ public class MultiplayerConnector : MonoBehaviour
 
         Debug.Log("OnJoinedLobby");
 
-        if (Application.loadedLevelName == "MainMenu")
+        if (SceneManager.GetActiveScene().name == "MainMenu")
         {
             RoomOptions roomOptions = new RoomOptions();
             roomOptions.maxPlayers = 20;
@@ -105,7 +105,7 @@ public class MultiplayerConnector : MonoBehaviour
         //Pause the message queue. While unity is loading a new level, updates from Photon are skipped.
         //So we have to tell Photon to wait until we resume the queue again after the level is loaded. See MultiplayerConnector.OnLevelWasLoaded
         PhotonNetwork.isMessageQueueRunning = false;
-        Application.LoadLevel("MedievalTown");
+        SceneManager.LoadScene("MedievalTown");
     }
 
     // <summary>
@@ -141,9 +141,9 @@ public class MultiplayerConnector : MonoBehaviour
 
     void OnDisconnectedFromPhoton()
     {
-        if (Application.loadedLevelName != "MainMenu")
+        if (SceneManager.GetActiveScene().name != "MainMenu")
         {
-            Application.LoadLevel("MainMenu");
+            SceneManager.LoadScene("MainMenu");
         }
     }
 

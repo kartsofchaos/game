@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Creates the player objects and spawns them on the spawnpoints assigned from
@@ -25,7 +25,7 @@ public class PlayerSpawner : MonoBehaviour
         // In this case go back to the main menu.
         if (PhotonNetwork.connected == false)
         {
-            Application.LoadLevel("MainMenu");
+            SceneManager.LoadScene("MainMenu");
             return;
         }
 	}

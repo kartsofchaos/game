@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 44bbaf4e5cbb24d488585d190f5ad05b
+labels:
+- beast
+- lightmap
+- lightmapping
+- gI
+- ibl
+- hdr
+- skylight
+- bake
+- baking
+- illumination
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

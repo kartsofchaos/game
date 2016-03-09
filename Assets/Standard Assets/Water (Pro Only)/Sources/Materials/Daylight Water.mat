@@ -2,14 +2,16 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 3
+  serializedVersion: 6
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Daylight Water
   m_Shader: {fileID: 4800000, guid: 1cac2e0bcc34e4b3cbb4bd85982eba83, type: 3}
-  m_ShaderKeywords: []
+  m_ShaderKeywords: 
+  m_LightmapFlags: 5
   m_CustomRenderQueue: -1
+  stringTagMap: {}
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:
@@ -66,11 +68,11 @@ Material:
       data:
         first:
           name: _WaveScale
-        second: .0537142865
+        second: 0.053714287
       data:
         first:
           name: _ReflDistort
-        second: .439999998
+        second: 0.44
       data:
         first:
           name: _RefrDistort
@@ -82,15 +84,15 @@ Material:
         second: {r: 1, g: 1, b: 0, a: 0}
       data:
         first:
-          name: _BumpMap_ST
-        second: {r: 1, g: 1, b: 0, a: 0}
-      data:
-        first:
           name: _RefrColor
-        second: {r: .937254906, g: .937254906, b: .937254906, a: 1}
+        second: {r: 0.9372549, g: 0.9372549, b: 0.9372549, a: 1}
       data:
         first:
           name: _Fresnel_ST
+        second: {r: 1, g: 1, b: 0, a: 0}
+      data:
+        first:
+          name: _BumpMap_ST
         second: {r: 1, g: 1, b: 0, a: 0}
       data:
         first:
@@ -107,7 +109,7 @@ Material:
       data:
         first:
           name: _HorizonColor
-        second: {r: .135759518, g: .228107125, b: .381078809, a: 0}
+        second: {r: 0.13575952, g: 0.22810712, b: 0.3810788, a: 0}
       data:
         first:
           name: _ReflectionTex_ST

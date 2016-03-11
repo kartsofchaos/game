@@ -682,8 +682,8 @@ public class CarHandling : CarBase
 
         // Create a new Wheel structure to contain our info for this wheel
         Wheel wheel = new Wheel();
-        wheel.collider = wc;
-
+        //wheel.collider = wc;
+        
         // The true game object should be in a child object first transform
         wheel.wheelGraphic = wheelTransform;
         wheel.collider.radius = wheel.wheelGraphic.GetComponent<Renderer>().bounds.size.y / 2;

@@ -255,15 +255,23 @@ Material:
         second: {r: 1, g: 1, b: 0, a: 0}
       data:
         first:
+          name: _BumpMap_ST
+        second: {r: 1, g: 1, b: 0, a: 0}
+      data:
+        first:
+          name: _Displacement
+        second: {r: 6.6371665, g: 20.353983, b: -1, a: -0.681416}
+      data:
+        first:
+          name: _ShoreTiling
+        second: {r: 1, g: 1, b: 0.1, a: 0.1}
+      data:
+        first:
           name: _RefrColor
         second: {r: 0.5233905, g: 0.9477612, b: 0.9121496, a: 1}
       data:
         first:
           name: _Fresnel_ST
-        second: {r: 1, g: 1, b: 0, a: 0}
-      data:
-        first:
-          name: _BumpMap_ST
         second: {r: 1, g: 1, b: 0, a: 0}
       data:
         first:
@@ -357,14 +365,6 @@ Material:
         first:
           name: _GDirectionCD
         second: {r: 0.7033888, g: -0.6799999, b: 0.7175735, a: -0.2}
-      data:
-        first:
-          name: _Displacement
-        second: {r: 6.6371665, g: 20.353983, b: -1, a: -0.681416}
-      data:
-        first:
-          name: _ShoreTiling
-        second: {r: 1, g: 1, b: 0.1, a: 0.1}
       data:
         first:
           name: _WaveScale4

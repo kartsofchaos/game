@@ -161,14 +161,14 @@ public class CarController : MonoBehaviour
 		
 	void Update() {
 		// Flip back car if upside down
-		if (carTransform.localEulerAngles.z > 180.0f) {
+		if (carTransform.localEulerAngles.z > 170f) {
 			carTransform.localEulerAngles = new Vector3 (
 				carTransform.localEulerAngles.x,
 				carTransform.localEulerAngles.y,
 				0.0f
 			);
-		}
-	}
+        }
+    }
 
 
 	// We only need to synchronize a few variables to recreate a good approximation of the cars position on each client

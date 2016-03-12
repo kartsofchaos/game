@@ -18,6 +18,7 @@ public class CarController : MonoBehaviour
     public float maxSteeringAngle;
     public float AntiRoll = 5000.0f;
     public Rigidbody rigidbody; 
+	public Transform carTransform; 
 
     // finds the corresponding visual wheel
     // correctly applies the transform
@@ -96,4 +97,14 @@ public class CarController : MonoBehaviour
             ApplyLocalPositionToVisuals(axleInfo.rightWheel);
         }
     }
+
+	void Update() {
+		if (carTransform.localEulerAngles.z > 180) {
+			carTransform.localEulerAngles = new Vector3 (
+				carTransform.localEulerAngles.x,
+				carTransform.localEulerAngles.y,
+				0.0f
+			);
+		}
+	}
 }

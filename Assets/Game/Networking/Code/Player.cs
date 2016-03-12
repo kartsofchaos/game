@@ -57,15 +57,6 @@ public class Player : PlayerBase
             readProperties();
     }
 
-    void Start()
-    {
-  //      PhotonNetwork.sendRate = 60;
- //       PhotonNetwork.sendRateOnSerialize = 60;
-
-        startPosition = transform.position;
-        startRotation = transform.rotation;
-    }
-
     // Read our name from the playerproperties and destroy it
     private void readProperties()
     {
@@ -85,8 +76,6 @@ public class Player : PlayerBase
         if (_health <= 0)
         {
             _health = 0;
-     //       Instantiate(ExplosionPrefab, transform.position, Quaternion.identity);
-     //       SetVisibility(false);
 
             //If our local ship dies, call the respawn function after 2 seconds
             if (PhotonView.isMine == true)
@@ -96,25 +85,30 @@ public class Player : PlayerBase
         }
     }
      
+	/// <summary>
+	/// This method gets called right after a GameObject is created through PhotonNetwork.Instantiate
+	/// The fifth parameter in PhotonNetwork.instantiate sets the instantiationData and every client
+	/// can access them through the PhotonView. In our case we use this to send which team the ship
+	/// belongs to. This methodology is very useful to send data that only has to be sent once.
+	/// </summary>
+	/// <param name="info">Info.</param>
     void OnPhotonInstantiate(PhotonMessageInfo info)
     {
-        //This method gets called right after a GameObject is created through PhotonNetwork.Instantiate
-        //The fifth parameter in PhotonNetwork.instantiate sets the instantiationData and every client
-        //can access them through the PhotonView. In our case we use this to send which team the ship
-        //belongs to. This methodology is very useful to send data that only has to be sent once.
-
         if (!PhotonView.isMine)
         {
             SetTeam((Team)PhotonView.instantiationData[0]);
         }
     }
 
+	/// <summary>
+	/// Multiple components need to synchronize values over the network.
+	/// The SerializeState methods are made up, but they're useful to keep
+	/// all the data separated into their respective components
+	/// </summary>
+	/// <param name="stream">Stream.</param>
+	/// <param name="info">Info.</param>
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        //Multiple components need to synchronize values over the network.
-        //The SerializeState methods are made up, but they're useful to keep
-        //all the data separated into their respective components
-
         SerializeState(stream, info);
 
         CarVisuals.SerializeState(stream, info);
@@ -142,4 +136,18 @@ public class Player : PlayerBase
             }
         }
     }
+
+	void OnGUI() 
+	{
+		float position = Screen.width - 100;
+		GUI.Box(new Rect(position, 0, 100, 100), "");
+
+		GUILayout.BeginArea (new Rect (position, 10, Screen.width, Screen.height));
+		{
+			GUILayout.Label ("Name: " + Name);
+			GUILayout.Label ("Health: " + Health);
+			GUILayout.Label ("Armor: " + Armor);
+		}
+		GUILayout.EndArea ();
+	}
 }

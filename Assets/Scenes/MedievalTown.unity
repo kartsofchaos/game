@@ -10184,7 +10184,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 679220636}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 663.1592, y: -336.17688, z: -785.07916}
+  m_LocalPosition: {x: 665.5, y: -322.95898, z: -575.2395}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -24229,7 +24229,6 @@ GameObject:
   - 223: {fileID: 1734897617}
   - 114: {fileID: 1734897616}
   - 114: {fileID: 1734897615}
-  - 114: {fileID: 1734897619}
   m_Layer: 5
   m_Name: Menu Canvas
   m_TagString: Untagged
@@ -24313,19 +24312,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1734897619
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1734897614}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16afcdba5c10e0246b52ec2d6f12cfbf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ButtonFont: {fileID: 0}
-  ButtonBackground: {fileID: 0}
 --- !u!4 &1740760571 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400002, guid: 6fc4bd8fb4b5021419439e515b02acd3, type: 2}
@@ -27355,7 +27341,6 @@ GameObject:
   - 4: {fileID: 1930597292}
   - 114: {fileID: 1930597295}
   - 114: {fileID: 1930597294}
-  - 114: {fileID: 1930597293}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -27375,20 +27360,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 76312269}
   m_RootOrder: 1
---- !u!114 &1930597293
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400004, guid: 6a80cc77d6532534a8369fae2f5d2633,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1930597291}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16afcdba5c10e0246b52ec2d6f12cfbf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ButtonFont: {fileID: 12800000, guid: 4daba60e302c7f54d8d4badee164583d, type: 3}
-  ButtonBackground: {fileID: 2800000, guid: 215904e867b42fe4a832e829e5dbae70, type: 3}
 --- !u!114 &1930597294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27421,6 +27392,8 @@ MonoBehaviour:
   - {fileID: 731692138}
   - {fileID: 137859395}
   - {fileID: 1079478583}
+  isShowing: 0
+  menuCanvas: {fileID: 1734897614}
 --- !u!1001 &1932201094
 Prefab:
   m_ObjectHideFlags: 0
@@ -29424,9 +29397,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1734897619}
+      - m_Target: {fileID: 1930597295}
         m_MethodName: ChooseBlueTeam
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1734897614}
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

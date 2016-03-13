@@ -18,6 +18,9 @@ public class PlayerSpawner : MonoBehaviour
     /// </summary>
     public Transform[] BlueSpawns;
 
+	public bool isShowing; 
+	public GameObject menuCanvas; 
+
 	// Use this for initialization
 	void Start ()
     {
@@ -30,10 +33,27 @@ public class PlayerSpawner : MonoBehaviour
         }
 	}
 
+	void Update() {
+		bool escape = Input.GetKeyDown ("escape");
+		if (escape) {
+			isShowing = !isShowing; 
+			menuCanvas.SetActive (isShowing);
+		}
+	}
+
+	public void ChooseRedTeam() {
+		CreateLocalPlayer (Team.Red);
+	}
+
+	public void ChooseBlueTeam() {
+		CreateLocalPlayer (Team.Blue);
+	}
+
     public void CreateLocalPlayer(Team team)
     {
         // Notice the difference from PhotonNetwork.Instantiate to Unitys GameObject.Instantiate
-        GameObject newPlayerObject = PhotonNetwork.Instantiate("ClumsyKnight", new Vector3(25f, 1f, -15f), Quaternion.identity, 0, new object[] { (int)team });
+        GameObject newPlayerObject = PhotonNetwork.Instantiate("ClumsyKnight", new Vector3(25f, 1f, -15f), 
+			Quaternion.identity, 0, new object[] { (int)team });
 
         // Spawn at the right place
         if (team == Team.Red)
@@ -47,15 +67,8 @@ public class PlayerSpawner : MonoBehaviour
             newPlayerObject.transform.rotation = BlueSpawns[0].rotation;
         }
 
- //       Player newPlayer = newPlayerObject.GetComponentInChildren<Player>();
-//        newPlayer.SetTeam( team );
-
         // Find the MenuCamera and deactivate it
 		Camera.main.GetComponent<SmoothFollowCustom>().SetTarget( newPlayerObject.GetComponentInChildren<CarHandling>().transform );
-
-		// Instantiate a HUD for the player and place it in the local players hierharky
-		//GameObject hud = Instantiate(Resources.Load("HUD/SportscarHUD")) as GameObject;
-		//hud.transform.parent = newPlayerObject.transform;
     }
 
 }

@@ -6,31 +6,18 @@ using System.Collections;
 /// </summary>
 public class PickTeamGUI : MonoBehaviour
 {
-    public Font ButtonFont;
-    public Texture2D ButtonBackground;
+    //public Font ButtonFont;
+    //public Texture2D ButtonBackground;
 
     GUIStyle m_PickButtonStyle;
-    /*
-    void Update()
-    {
-        if (Input.GetButtonDown("BlueTeamButton") == true)
-        {
-            ChooseTeam(Team.Blue);
-        }
 
-        if (Input.GetButtonDown("RedTeamButton") == true)
-        {
-            ChooseTeam(Team.Red);
-        }
-    }
-    */
-    void ChooseTeam(Team team)
+    public void ChooseTeam(Team team)
     {
         GetComponent<PlayerSpawner>().CreateLocalPlayer(team);
         enabled = false;
     }
 
-    void OnGUI()
+    /*void OnGUI()
     {
         LoadStyles();
 
@@ -53,21 +40,11 @@ public class PickTeamGUI : MonoBehaviour
             GUILayout.EndHorizontal();
         }
         GUILayout.EndArea();
-    }
+    }*/
 
     string GetButtonLabel(Team team)
     {
-    //    GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
         int playerCount = 0;
-/*
-        for (int i = 0; i < shipObjects.Length; ++i)
-        {
-            if (shipObjects[i].GetComponent<Ship>() != null && shipObjects[i].GetComponent<Player>().Team == team)
-            {
-                playerCount++;
-            }
-        }
-*/
         string label = team.ToString() + " Team\n";
         label += playerCount.ToString();
 
@@ -85,7 +62,7 @@ public class PickTeamGUI : MonoBehaviour
 
     void LoadStyles()
     {
-        if (m_PickButtonStyle == null)
+        /*if (m_PickButtonStyle == null)
         {
             m_PickButtonStyle = new GUIStyle(GUI.skin.button);
             m_PickButtonStyle.font = ButtonFont;
@@ -99,6 +76,6 @@ public class PickTeamGUI : MonoBehaviour
             m_PickButtonStyle.hover.textColor = Color.white;
 
             m_PickButtonStyle.active.background = ButtonBackground;
-        }
+        }*/
     }
 }
